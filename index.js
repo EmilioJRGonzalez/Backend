@@ -52,14 +52,14 @@ class ProductManager {
         }
     }
 
-    getProductById (code){
+    getProductById (id){
         this.readFile();
-        let product = this.products.find((p) => p.code === code);
+        let product = this.products.find((p) => p.id === id);
 
         if (product) {
             console.log(product);
         } else {
-            console.log (`No se encontró un producto con el codigo ${code}`);
+            console.log (`No se encontró un producto con el id ${id}`);
         }
     }
 
@@ -123,9 +123,9 @@ product.getProducts();
 
 //product.getProducts();
 
-//product.getProductById('aaa456');
+product.getProductById(1);
 
-//product.getProductById('def456');
+product.getProductById(10);
 
 //product.deleteProduct('abc123');
 
