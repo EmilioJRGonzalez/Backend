@@ -123,9 +123,9 @@ product.getProducts();
 
 //product.getProducts();
 
-product.getProductById(1);
+//product.getProductById(1);
 
-product.getProductById(10);
+//product.getProductById(10);
 
 //product.deleteProduct('abc123');
 
