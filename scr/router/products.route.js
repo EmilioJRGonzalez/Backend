@@ -3,7 +3,6 @@ const uuid4 = require('uuid4')
 const ProductManager = require('../ProductManager')
 
 const {Router} = express
-
 const router = new Router()
 
 let prod = new ProductManager('./scr/productos.json')
