@@ -6,7 +6,9 @@
     "price": 300,
     "thumbnail": "Sin imagen",
     "code": "def456",
-    "stock": 5
+    "stock": 5,
+    "status": true,
+    "category": "Categoria 1"
   },
   {
     "id": 2,
@@ -15,16 +17,20 @@
     "price": 400,
     "thumbnail": "Sin imagen",
     "code": "aaa111",
-    "stock": 8
+    "stock": 8,
+    "status": true,
+    "category": "Categoria 1"
   },
   {
     "id": 3,
-    "title": "producto prueba 3",
-    "description": "Este es un producto prueba 3",
+    "title": "producto prueba 30",
+    "description": "Este es un producto prueba 30",
     "price": 500,
-    "thumbnail": "Sin imagen",
+    "thumbnail": [],
     "code": "abc123",
-    "stock": 10
+    "stock": 10,
+    "status": true,
+    "category": "Categoria 10"
   },
   {
     "id": 4,
@@ -33,7 +39,9 @@
     "price": 400,
     "thumbnail": "Sin imagen",
     "code": "aaa789",
-    "stock": 18
+    "stock": 18,
+    "status": true,
+    "category": "Categoria 1"
   },
   {
     "id": 5,
@@ -42,7 +50,9 @@
     "price": 400,
     "thumbnail": "Sin imagen",
     "code": "ggg789",
-    "stock": 18
+    "stock": 18,
+    "status": true,
+    "category": "Categoria 2"
   },
   {
     "id": 6,
@@ -51,7 +61,9 @@
     "price": 400,
     "thumbnail": "Sin imagen",
     "code": "fff789",
-    "stock": 18
+    "stock": 18,
+    "status": true,
+    "category": "Categoria 2"
   },
   {
     "id": 7,
@@ -60,7 +72,9 @@
     "price": 400,
     "thumbnail": "Sin imagen",
     "code": "eee789",
-    "stock": 18
+    "stock": 18,
+    "status": true,
+    "category": "Categoria 2"
   },
   {
     "id": 8,
@@ -69,7 +83,9 @@
     "price": 400,
     "thumbnail": "Sin imagen",
     "code": "ddd789",
-    "stock": 18
+    "stock": 18,
+    "status": true,
+    "category": "Categoria 2"
   },
   {
     "id": 9,
@@ -78,7 +94,9 @@
     "price": 400,
     "thumbnail": "Sin imagen",
     "code": "ccc789",
-    "stock": 18
+    "stock": 18,
+    "status": true,
+    "category": "Categoria 2"
   },
   {
     "id": 10,
@@ -87,6 +105,47 @@
     "price": 400,
     "thumbnail": "Sin imagen",
     "code": "bbb789",
-    "stock": 18
+    "stock": 18,
+    "status": true,
+    "category": "Categoria 2"
+  },
+  {
+    "id": "aab2176c-38b8-44a6-98c3-37bab0a6b350",
+    "title": "producto prueba 150",
+    "description": "Este es un producto prueba 150",
+    "price": 150,
+    "thumbnail": [
+      "Sin imagen"
+    ],
+    "code": "xxx111",
+    "stock": 10,
+    "status": true,
+    "category": "Categoria 2"
+  },
+  {
+    "id": "928fafc5-ad4b-41c0-8237-64f1f71ae537",
+    "title": "producto prueba 151",
+    "description": "Este es un producto prueba 151",
+    "price": 151,
+    "thumbnail": [
+      "Sin imagen"
+    ],
+    "code": "yyy111",
+    "stock": 10,
+    "status": true,
+    "category": "Categoria 2"
+  },
+  {
+    "id": "10b8c4fe-352f-42ae-9f4b-14279018097c",
+    "title": "producto prueba 152",
+    "description": "Este es un producto prueba 152",
+    "price": 152,
+    "thumbnail": [
+      "Sin imagen"
+    ],
+    "code": "zzz111",
+    "stock": 10,
+    "status": true,
+    "category": "Categoria 2"
   }
 ]

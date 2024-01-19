@@ -32,26 +32,26 @@ class ProductManager {
         return this.products;
     }
 
-    addProduct(title, description, price, thumbnail, code, stock){
+    async addProduct(id, title, description, price, thumbnail, code, stock, status, category){
 
-        if (!title || !description || !price || !thumbnail || !code || !stock){
-            console.log("ERROR: Debe ingresar todos los parametros");
+        if (!title || !description || !price || !thumbnail || !code || !stock || !category){
+            return "ERROR: Debe ingresar todos los parametros"
         }else{
 
-            this.readFile().then(res => {
-                this.products = JSON.parse(res);
+            let res = await fs.promises.readFile(this.path, 'utf-8')
+            this.products = JSON.parse(res);
 
-                if (!this.products.some((p) => p.code === code)) {
-                    this.id = this.getNewId();
-                    let newProduc = { id: this.id, title, description, price, thumbnail, code, stock };
-    
-                    this.products.push(newProduc);
-                    this.writeFile();
-                    console.log(`El producto '${title}' fue agregado correctamente`);
-                } else {
-                    console.log(`ERROR: No fue posible dar de alta el producto. Ya existe el codigo ${code}`);
-                }
-            }) 
+            if (!this.products.some((p) => p.code === code)) {
+                //this.id = this.getNewId();
+                let newProduc = { id, title, description, price, thumbnail, code, stock, status, category };
+
+                this.products.push(newProduc);
+                this.writeFile();
+                return `El producto '${title}' fue agregado correctamente`
+            } else {
+                return `ERROR: No fue posible dar de alta el producto. Ya existe el codigo ${code}`
+            }
+            
 
         }
     }
@@ -69,10 +69,33 @@ class ProductManager {
         }
     }
 
-    deleteProduct (id){
-        this.readFile().then(res => {
-            this.products = JSON.parse(res);
+    async deleteProduct (id){
+        let res = await fs.promises.readFile(this.path, 'utf-8')
+        this.products = JSON.parse(res);
 
+        let aux = -1
+        for (let i = 0 ; i < this.products.length; i++) {
+            if (this.products[i].id == id){
+                aux = i;
+            }
+        }
+
+        if (aux >= 0){
+            this.products.splice(aux, 1);
+            this.writeFile();
+            return `El producto con el id ${id} fue eliminado correctamente`
+        } else {
+            return `Error: No se encontró un producto con el id ${id}`
+        }
+    }
+
+    async updateProduct (id, title, description, price, thumbnail, code, stock, status, category){
+
+        if (!title || !description || !price || !thumbnail || !code || !stock || !category){
+            return "ERROR: Debe ingresar todos los parametros"
+        }else{
+            let res = await fs.promises.readFile(this.path, 'utf-8')
+            this.products = JSON.parse(res);
             let aux = -1
             for (let i = 0 ; i < this.products.length; i++) {
                 if (this.products[i].id == id){
@@ -81,40 +104,19 @@ class ProductManager {
             }
 
             if (aux >= 0){
-                this.products.splice(aux, 1);
+                this.products[aux].title = title;
+                this.products[aux].description = description;
+                this.products[aux].price = price;
+                this.products[aux].thumbnail = thumbnail;
+                this.products[aux].code = code;
+                this.products[aux].stock = stock;
+                this.products[aux].status = status;
+                this.products[aux].category = category;
                 this.writeFile();
-                console.log (`El producto con el id ${id} fue eliminado correctamente`);
+                return `El producto con el codigo ${id} fue actualizado`
             } else {
-                console.log (`Error: No se encontró un producto con el id ${id}`);
+                return `Error: No se encontró un producto con el codigo ${id}`
             }
-        })
-    }
-
-    updateProduct (id, title, description, price, thumbnail, stock){
-        if (!title || !description || !price || !thumbnail || !stock){
-            console.log("ERROR: Debe ingresar todos los parametros");
-        }else{
-            this.readFile().then(res => {
-                this.products = JSON.parse(res);
-                let aux = -1
-                for (let i = 0 ; i < this.products.length; i++) {
-                    if (this.products[i].code == id){
-                        aux = i;
-                    }
-                }
-
-                if (aux >= 0){
-                    this.products[aux].title = title;
-                    this.products[aux].description = description;
-                    this.products[aux].price = price;
-                    this.products[aux].thumbnail = thumbnail;
-                    this.products[aux].stock = stock;
-                    this.writeFile();
-                    console.log (`El producto con el codigo ${id} fue actualizado`);
-                } else {
-                    console.log (`Error: No se encontró un producto con el codigo ${id}`);
-                }
-            })
         }
     }
 }
