@@ -89,9 +89,8 @@ class ProductManager {
         }
     }
 
-    async updateProduct (body){
+    async updateProduct (id, body){
 
-        let id = body.id
         let title = body.title
         let description = body.description
         let price = body.price

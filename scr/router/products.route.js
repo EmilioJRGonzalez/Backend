@@ -60,9 +60,10 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
+    let id = req.params.id
     let body = req.body
-    
-    let aux = await prod.updateProduct(body)
+
+    let aux = await prod.updateProduct(id, body)
 
     res.send({data:[], message: aux})
 
