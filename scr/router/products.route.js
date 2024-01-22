@@ -60,17 +60,9 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
-    let id = req.body.id
-    let title = req.body.title
-    let description = req.body.description
-    let price = req.body.price
-    let thumbnail = req.body.thumbnail
-    let code = req.body.code
-    let stock = req.body.stock
-    let status = true
-    let category = req.body.category
-
-    let aux = await prod.updateProduct(id, title, description, price, thumbnail, code, stock, status, category)
+    let body = req.body
+    
+    let aux = await prod.updateProduct(body)
 
     res.send({data:[], message: aux})
 

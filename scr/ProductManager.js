@@ -89,11 +89,25 @@ class ProductManager {
         }
     }
 
-    async updateProduct (id, title, description, price, thumbnail, code, stock, status, category){
+    async updateProduct (body){
 
-        if (!title || !description || !price || !thumbnail || !code || !stock || !category){
-            return "ERROR: Debe ingresar todos los parametros"
+        let id = body.id
+        let title = body.title
+        let description = body.description
+        let price = body.price
+        let thumbnail = body.thumbnail
+        let code = body.code
+        let stock = body.stock
+        let status = true
+        let category = body.category
+
+        if (!id)
+        {   
+            return `No se recibió el id del producto`
         }else{
+            if (!title && !description && !price && !thumbnail && !code && !stock && !category){
+                return `Debe ingresar al menos un dato para actualizar`
+            }
             let res = await fs.promises.readFile(this.path, 'utf-8')
             this.products = JSON.parse(res);
             let aux = -1
@@ -104,14 +118,30 @@ class ProductManager {
             }
 
             if (aux >= 0){
-                this.products[aux].title = title;
-                this.products[aux].description = description;
-                this.products[aux].price = price;
-                this.products[aux].thumbnail = thumbnail;
-                this.products[aux].code = code;
-                this.products[aux].stock = stock;
-                this.products[aux].status = status;
-                this.products[aux].category = category;
+                if (title){
+                    this.products[aux].title = title;
+                }
+                if (description){
+                    this.products[aux].description = description;
+                }
+                if (price){
+                    this.products[aux].price = price;
+                }
+                if (thumbnail){
+                    this.products[aux].thumbnail = thumbnail;
+                }
+                if (code){
+                    this.products[aux].code = code;
+                }
+                if (stock){
+                    this.products[aux].stock = stock;
+                }
+                if (status){
+                    this.products[aux].status = status;
+                }
+                if (category){
+                    this.products[aux].category = category;
+                }
                 this.writeFile();
                 return `El producto con el codigo ${id} fue actualizado`
             } else {
