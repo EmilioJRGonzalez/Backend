@@ -20,6 +20,8 @@
   "homepage": "https://github.com/EmilioJRGonzalez/Backend#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "socket.io": "^4.7.4",
     "uuid4": "^2.0.3"
   }
 }
