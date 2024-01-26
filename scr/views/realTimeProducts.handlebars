@@ -41,8 +41,8 @@
         </div>
 
         <!-- Lado Derecho - Lista de Productos con Cards -->
-        <div class="col-md-9" id="lista" style="overflow-y: scroll; height: 85vh;">
-            <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col-md-9" style="overflow-y: scroll; height: 85vh;">
+            <div id="lista" class="row row-cols-1 row-cols-md-2 g-4">
                 <!-- Agrega tus Cards aquí -->
                 {{#each products}}
                   <div class="col">
@@ -57,7 +57,6 @@
                   </div>
                 {{/each}}
                 <!-- Repite este bloque para más productos -->
-
 
             </div>
         </div>
