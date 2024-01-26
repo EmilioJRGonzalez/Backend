@@ -3,14 +3,9 @@
   alert('Hola Mundo!');
 }); */
 
-//const socket = io()
+const socket = io()
 
-/* socket.on('messsage-all', (data)=> {
-  console.log(data)
-  render(data)
-  let chat = document.getElementById('caja')
-  chat.scrollTop = chat.scrollHeight
-})
+/* 
 
 const render = (data)=> {
   const html = data.map(elem =>{
@@ -36,4 +31,15 @@ const addMessage = ()=> {
   return false
 }
 
+socket.on('products-update', (data)=> {
+  console.log(data)
+  //render(data)
+  let chat = document.getElementById('lista')
+  chat.scrollTop = chat.scrollHeight
+})
 
+const addProduct = () =>{
+  console.log("test")
+
+  return false
+}

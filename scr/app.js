@@ -38,7 +38,7 @@ app.use(express.json())
 const io = new Server(server)
 io.on('connection', (socket)=> {
   console.log('Hola Nuevo Cliente')
-  socket.emit('wellcome', 'Bienvenido Clinete nuevo')
+  socket.emit('wellcome', 'Bienvenido Cliente nuevo')
 
   socket.on('new-message', (data)=> {
     arrMessage.push(data)

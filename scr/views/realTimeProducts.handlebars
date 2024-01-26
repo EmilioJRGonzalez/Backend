@@ -1,6 +1,67 @@
-<div class="container">
-  <div>
+<div class="container text-center">
     <h1>Lista de productos en Tiempo Real</h1>
-    <div id="lista" class="caja"></div>
-  </div>
 </div>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Lado Izquierdo - Formulario -->
+        <div class="col-md-3 container shadow-lg p-3 bg-body rounded">
+            <form onsubmit="return addProduct()">
+                <div class="mb-3">
+                    <label for="Titulo" class="form-label">Titulo</label>
+                    <input type="text" class="form-control" id="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="Descripcion" class="form-label">Descripcion</label>
+                    <textarea class="form-control" id="description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="Precio" class="form-label">Precio</label>
+                    <input type="text" class="form-control" id="price" required>
+                </div>
+                <div class="mb-3">
+                    <label for="Codigo" class="form-label">Codigo</label>
+                    <input type="text" class="form-control" id="code">
+                </div>
+                <div class="mb-3">
+                    <label for="Stock" class="form-label">Stock</label>
+                    <input type="text" class="form-control" id="stock">
+                </div>
+                <div class="mb-3">
+                    <label for="Categoria" class="form-label">Categoria</label>
+                    <input type="text" class="form-control" id="category">
+                </div>
+                <div class="mb-3">
+                    <label for="RutaDeImagen" class="form-label">Ruta de imagen</label>
+                    <input type="text" class="form-control" id="thumbnail">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Agregar Producto</button>
+            </form>
+        </div>
+
+        <!-- Lado Derecho - Lista de Productos con Cards -->
+        <div class="col-md-9" id="lista" style="overflow-y: scroll; height: 85vh;">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <!-- Agrega tus Cards aquí -->
+                <div class="col">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Producto 1</h5>
+                            <p class="card-text">Descripción del producto 1.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Repite este bloque para más productos -->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Enlace CDN de Bootstrap JS (requerido para ciertos componentes de Bootstrap) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
