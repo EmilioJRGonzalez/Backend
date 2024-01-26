@@ -33,6 +33,8 @@ router.post('/', async (req, res) => {
     let id = uuid4()
     let msg = 'Producto guardado'
 
+    console.log("BODY ", req.body)
+
     let title = req.body.title
     let description = req.body.description
     let price = req.body.price

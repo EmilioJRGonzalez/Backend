@@ -1,8 +1,4 @@
 
-/* document.addEventListener('DOMContentLoaded', function() {
-  alert('Hola Mundo!');
-}); */
-
 const socket = io()
 
 /* 
@@ -39,7 +35,17 @@ socket.on('products-update', (data)=> {
 })
 
 const addProduct = () =>{
-  console.log("test")
+  console.log("addProduct")
+  let product = {
+    title : document.getElementById('title').value,
+    description : document.getElementById('description').value,
+    price : document.getElementById('price').value,
+    code : document.getElementById('code').value,
+    stock : document.getElementById('stock').value,
+    category : document.getElementById('category').value,
+    thumbnail : document.getElementById('thumbnail').value
+  }
 
+  socket.emit('product-add', product)
   return false
 }
