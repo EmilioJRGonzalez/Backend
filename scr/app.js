@@ -84,13 +84,13 @@ io.on('connection', (socket)=> {
     realizarLlamadaPOST(`http://localhost:8080/api/product/`, data)
     .then(resultado => {
       console.log('Llamada POST exitosa:', resultado);
+
+        let products = getAllProducts()
+        console.log("getAllProducts ", products)
     })
     .catch(error => {
       console.error('Error en la llamada POST:', error);
     });
-
-    let products = getAllProducts()
-    console.log("getAllProducts ", products)
 
     //arrMessage.push(data)
     //io.sockets.emit('messsage-all', arrMessage)
