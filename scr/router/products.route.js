@@ -7,10 +7,6 @@ const router = new Router()
 
 let prod = new ProductManager('./scr/productos.json')
 
-/* router.get('/', (req, res) => {
-    res.send('<h1>Bienvenido</h1>')
-}) */
-
 router.get('/', async (req, res) => {
     let aux = await prod.getProducts()
     let limit = req.query.limit
@@ -32,8 +28,6 @@ router.get('/:pid', async (req, res) => {
 router.post('/', async (req, res) => {
     let id = uuid4()
     let msg = 'Producto guardado'
-
-    console.log("BODY ", req.body)
 
     let title = req.body.title
     let description = req.body.description

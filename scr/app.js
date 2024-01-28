@@ -33,9 +33,6 @@ app.use('/api/product', productRouters)
 app.use('/api/cart', cartRouters)
 app.use('/realtimeproducts', realtimeRouter)
 
-let products = []
-let arrMessage = []
-
 function realizarLlamadaPOST(url, datos) {
     return new Promise((resolve, reject) => {
         const opciones = {
@@ -44,34 +41,6 @@ function realizarLlamadaPOST(url, datos) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(datos)
-        };
-
-        console.log('1')
-  
-        fetch(url, opciones)
-            .then(response => {
-                if (response.ok) {
-                    console.log('2')
-                    return response.json();
-                }
-                throw new Error('Error en la llamada POST en promise');
-            })
-            .then(data => {
-                resolve(data);
-            })
-            .catch(error => {
-                reject(error);
-        });
-    });
-}
-
-function getAllProductsII(url) {
-    return new Promise((resolve, reject) => {
-        const opciones = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
         };
 
         console.log('1')
@@ -109,12 +78,6 @@ const io = new Server(server)
 io.on('connection', (socket)=> {
   console.log('cliente conectado')
 
-  /* socket.on('products-update', (data)=> {
-    console.log("UPDATE ", data)
-    //arrMessage.push(data)
-    //io.sockets.emit('messsage-all', arrMessage)
-  }) */
-
   socket.on('product-add', (data)=> {
     console.log("ADD ")
 
@@ -126,17 +89,8 @@ io.on('connection', (socket)=> {
       console.error('Error en la llamada POST:', error);
     });
 
-    //let products = getAllProducts()
-    //console.log("getAllProducts ", products)
-
-    getAllProductsII(`http://localhost:8080/api/product/`)
-    .then(resultado => {
-      console.log('Llamada POST exitosa getAllProductsII:', resultado);
-      io.sockets.emit('products-update', resultado)
-    })
-    .catch(error => {
-      console.error('Error en la llamada POST getAllProductsII:', error);
-    });
+    let products = getAllProducts()
+    console.log("getAllProducts ", products)
 
     //arrMessage.push(data)
     //io.sockets.emit('messsage-all', arrMessage)
@@ -145,7 +99,6 @@ io.on('connection', (socket)=> {
 })
   
  
-
 server.listen(PORT, ()=> {
     console.log(`Servidor corriendo en puerto ${PORT}`)
 })
