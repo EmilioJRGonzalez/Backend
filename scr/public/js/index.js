@@ -1,13 +1,14 @@
 
 const socket = io()
 
-const render = (data)=> {
+socket.on('products-update', (data)=> {
+
   const html = data.map(elem =>{
     return (
       `
             <div class="col">
                 <div class="card" id=111>
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src=${elem.thumbnail} class="card-img-top" alt="..." width="100" height="100">
                     <div class="card-body">
                         <h5 class="card-title">${elem.title}</h5>
                         <p class="card-text">${elem.description}</p>
@@ -18,7 +19,10 @@ const render = (data)=> {
       `)
     }).join(' ')
     document.getElementById('lista').innerHTML = html
-} 
+    let chat = document.getElementById('lista')
+    chat.scrollTop = chat.scrollHeight
+    
+})
 
 
 const addMessage = ()=> {
@@ -30,15 +34,7 @@ const addMessage = ()=> {
   return false
 }
 
-socket.on('products-update', (data)=> {
-  console.log('products-update')
-  render(data)
-  let chat = document.getElementById('lista')
-  chat.scrollTop = chat.scrollHeight
-})
-
 const addProduct = () =>{
-  console.log("addProduct")
   let product = {
     title : document.getElementById('title').value,
     description : document.getElementById('description').value,

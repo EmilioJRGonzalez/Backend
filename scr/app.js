@@ -42,13 +42,10 @@ function realizarLlamadaPOST(url, datos) {
         },
         body: JSON.stringify(datos)
         };
-
-        console.log('1')
   
         fetch(url, opciones)
             .then(response => {
                 if (response.ok) {
-                    console.log('2')
                     return response.json();
                 }
                 throw new Error('Error en la llamada POST en promise');
@@ -64,9 +61,7 @@ function realizarLlamadaPOST(url, datos) {
 
 async function getAllProducts(){
     try {
-        // Llama a getProducts() y espera a que se resuelva la Promesa
         let resultado = await prod.getProducts()
-        //console.log('Datos obtenidos:', resultado);
         return resultado
     } catch (error) {
         console.error('Error al obtener los datos:', error);
@@ -78,28 +73,19 @@ const io = new Server(server)
 io.on('connection', (socket)=> {
   console.log('cliente conectado')
 
-  socket.on('product-add', (data)=> {
-    console.log("ADD ")
-
-    realizarLlamadaPOST(`http://localhost:8080/api/product/`, data)
-    .then(resultado => {
-      console.log('Llamada POST exitosa:', resultado);
-
-        let products = getAllProducts()
-        console.log("getAllProducts ", products)
-    })
-    .catch(error => {
-      console.error('Error en la llamada POST:', error);
+  socket.on('product-add', async (data)=> {
+    try{
+        await realizarLlamadaPOST(`http://localhost:8080/api/product/`, data);
+        //console.log('Llamada POST exitosa:');
+        let products = await getAllProducts()
+        //console.log("getAllProducts ", products);
+        io.sockets.emit('products-update', products);
+        } catch (error) {
+            console.error('Error en la llamada POST:', error);
+        };
     });
-
-    //arrMessage.push(data)
-    //io.sockets.emit('messsage-all', arrMessage)
-
-  })
 })
   
- 
 server.listen(PORT, ()=> {
     console.log(`Servidor corriendo en puerto ${PORT}`)
 })
-

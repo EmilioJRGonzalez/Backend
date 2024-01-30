@@ -4,7 +4,7 @@
     "title": "producto prueba 1",
     "description": "Este es un producto prueba 1",
     "price": 300,
-    "thumbnail": "Sin imagen",
+    "thumbnail": "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=crop",
     "code": "def456",
     "stock": 5,
     "status": true,
@@ -15,7 +15,7 @@
     "title": "producto prueba 2",
     "description": "Este es un producto prueba 2",
     "price": 400,
-    "thumbnail": "Sin imagen",
+    "thumbnail": "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=crop",
     "code": "aaa111",
     "stock": 8,
     "status": true,
@@ -26,7 +26,9 @@
     "title": "producto prueba 30",
     "description": "Este es un producto prueba 30",
     "price": 500,
-    "thumbnail": [],
+    "thumbnail": [
+      "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=crop"
+    ],
     "code": "abc123",
     "stock": 10,
     "status": true,
@@ -37,7 +39,7 @@
     "title": "producto prueba 4",
     "description": "Este es un producto prueba 4",
     "price": 400,
-    "thumbnail": "Sin imagen",
+    "thumbnail": "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=crop",
     "code": "aaa789",
     "stock": 18,
     "status": true,
@@ -48,7 +50,7 @@
     "title": "producto prueba 5",
     "description": "Este es un producto prueba 5",
     "price": 400,
-    "thumbnail": "Sin imagen",
+    "thumbnail": "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=crop",
     "code": "ggg789",
     "stock": 18,
     "status": true,
@@ -59,7 +61,7 @@
     "title": "producto prueba 6",
     "description": "Este es un producto prueba 6",
     "price": 400,
-    "thumbnail": "Sin imagen",
+    "thumbnail": "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=crop",
     "code": "fff789",
     "stock": 18,
     "status": true,
@@ -70,7 +72,7 @@
     "title": "producto prueba 7",
     "description": "Este es un producto prueba 7",
     "price": 400,
-    "thumbnail": "Sin imagen",
+    "thumbnail": "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=cropn",
     "code": "eee789",
     "stock": 18,
     "status": true,
@@ -81,7 +83,7 @@
     "title": "producto prueba 8",
     "description": "Este es un producto prueba 8",
     "price": 400,
-    "thumbnail": "Sin imagen",
+    "thumbnail": "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=crop",
     "code": "ddd789",
     "stock": 18,
     "status": true,
@@ -92,7 +94,7 @@
     "title": "producto prueba 9",
     "description": "Este es un producto prueba 9",
     "price": 400,
-    "thumbnail": "Sin imagen",
+    "thumbnail": "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=cropn",
     "code": "ccc789",
     "stock": 18,
     "status": true,
@@ -103,7 +105,7 @@
     "title": "producto prueba 10",
     "description": "Este es un producto prueba 10",
     "price": 400,
-    "thumbnail": "Sin imagen",
+    "thumbnail": "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=crop",
     "code": "bbb789",
     "stock": 18,
     "status": true,
@@ -115,7 +117,7 @@
     "description": "Este es un producto prueba 150",
     "price": 150,
     "thumbnail": [
-      "Sin imagen"
+      "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=crop"
     ],
     "code": "xxx111",
     "stock": 10,
@@ -128,7 +130,7 @@
     "description": "Este es un producto prueba 151",
     "price": 151,
     "thumbnail": [
-      "Sin imagen"
+      "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=crop"
     ],
     "code": "yyy111",
     "stock": 10,
@@ -141,11 +143,22 @@
     "description": "Este es un producto prueba 152",
     "price": 152,
     "thumbnail": [
-      "Sin imagen"
+      "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=crop"
     ],
     "code": "zzz111",
     "stock": 10,
     "status": true,
     "category": "Categoria 2"
+  },
+  {
+    "id": "dabf976e-5a53-468b-b13a-3b8fc7981c5d",
+    "title": "producto prueba 153",
+    "description": "Este es un producto prueba 153",
+    "price": "100",
+    "thumbnail": "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png?cs=srgb&dl=pexels-anni-roenkae-2693212.jpg&fm=jpg&h=200&w=200&fit=crop",
+    "code": "code153",
+    "stock": "10",
+    "status": true,
+    "category": "Categoria 3"
   }
 ]
