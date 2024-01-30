@@ -24,16 +24,6 @@ socket.on('products-update', (data)=> {
     
 })
 
-
-const addMessage = ()=> {
-  const msg = {
-    author: document.getElementById('name').value,
-    text: document.getElementById('text').value
-  }
-  socket.emit('new-message', msg)
-  return false
-}
-
 const addProduct = () =>{
   let product = {
     title : document.getElementById('title').value,
