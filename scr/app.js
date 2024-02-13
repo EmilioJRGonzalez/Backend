@@ -1,18 +1,21 @@
 const express = require ('express')
 //const = require('./ProductManager')
 const handlebars = require('express-handlebars')
-const ProductManager = require('./ProductManager')
+const ProductManager = require('./dao/fileSystem/ProductManager')
 const http = require('http')
 const {Server} = require('socket.io')
+const Database = require('./dao/db/db')
 const app = express()
 const PORT = 8080 || process.env.PORT
 
-let prod = new ProductManager('./scr/productos.json')
+let prod = new ProductManager('./scr/dao/fileSystem/data/productos.json')
 
 const productRouters = require('./router/products.route')
 const cartRouters = require('./router/carts.route')
 const homeRouter = require('./router/home.router')
 const realtimeRouter = require('./router/realtime.route')
+
+const producRoute = require ('./router/products.route.db')
 
 //SERVER HTTP
 const server = http.createServer(app)
@@ -32,6 +35,8 @@ app.use('/home', homeRouter)
 app.use('/api/product', productRouters)
 app.use('/api/cart', cartRouters)
 app.use('/realtimeproducts', realtimeRouter)
+
+app.use('/prod', producRoute)
 
 function realizarLlamadaPOST(url, datos) {
     return new Promise((resolve, reject) => {
@@ -88,4 +93,5 @@ io.on('connection', (socket)=> {
   
 server.listen(PORT, ()=> {
     console.log(`Servidor corriendo en puerto ${PORT}`)
+    Database.connect()
 })
