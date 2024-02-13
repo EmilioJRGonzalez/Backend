@@ -10,12 +10,11 @@ const PORT = 8080 || process.env.PORT
 
 let prod = new ProductManager('./scr/dao/fileSystem/data/productos.json')
 
-const productRouters = require('./router/products.route')
+//const productRouters = require('./router/products.route')
+const productRouters = require ('./router/products.route.db')
 const cartRouters = require('./router/carts.route')
 const homeRouter = require('./router/home.router')
 const realtimeRouter = require('./router/realtime.route')
-
-const producRoute = require ('./router/products.route.db')
 
 //SERVER HTTP
 const server = http.createServer(app)
@@ -35,8 +34,7 @@ app.use('/home', homeRouter)
 app.use('/api/product', productRouters)
 app.use('/api/cart', cartRouters)
 app.use('/realtimeproducts', realtimeRouter)
-
-app.use('/prod', producRoute)
+//app.use('/prod', producRoute)
 
 function realizarLlamadaPOST(url, datos) {
     return new Promise((resolve, reject) => {

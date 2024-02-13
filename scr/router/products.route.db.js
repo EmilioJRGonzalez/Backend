@@ -85,8 +85,6 @@ router.put('/:id', async (req, res) => {
 
         const resp = await Products.updateOne({_id: id}, update);
 
-        console.log(resp.matchedCount)
-
         res.send({
             msg: resp.matchedCount === 1 ? `El producto con el codigo ${id} fue actualizado` : `Error: No se encontró un producto con el codigo ${id}`,
             data: req.body
