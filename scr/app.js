@@ -1,5 +1,4 @@
 const express = require ('express')
-//const = require('./ProductManager')
 const handlebars = require('express-handlebars')
 const ProductManager = require('./dao/fileSystem/ProductManager')
 const http = require('http')
@@ -12,7 +11,7 @@ let prod = new ProductManager('./scr/dao/fileSystem/data/productos.json')
 
 //const productRouters = require('./router/products.route')
 const productRouters = require ('./router/products.route.db')
-const cartRouters = require('./router/carts.route')
+const cartRouters = require('./router/carts.route.db')
 const homeRouter = require('./router/home.router')
 const realtimeRouter = require('./router/realtime.route')
 
