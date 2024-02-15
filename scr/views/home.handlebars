@@ -1,8 +1,10 @@
 
 <h1>Lista de productos</h1>
 
+{{!-- {{products}} --}}
+
 {{#each products}}
-  <div class="card" style="width: 18rem;" id={{id}}>
+  <div class="card" style="width: 18rem;" id={{_id}}>
     <img src={{thumbnail}} class="card-img-top" alt="..." width="100" height="100">
     <div class="card-body">
       <h5 class="card-title">{{title}}</h5>

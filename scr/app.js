@@ -1,17 +1,20 @@
 const express = require ('express')
 const handlebars = require('express-handlebars')
 const ProductManager = require('./dao/fileSystem/ProductManager')
+const ProductManagerMongo = require('./dao/db/managers/ProductManagerMongo')
 const http = require('http')
 const {Server} = require('socket.io')
 const Database = require('./dao/db/db')
 const app = express()
 const PORT = 8080 || process.env.PORT
 
-let prod = new ProductManager('./scr/dao/fileSystem/data/productos.json')
+//let prod = new ProductManager('./scr/dao/fileSystem/data/productos.json')
+let prod = new ProductManagerMongo
 
-//const productRouters = require('./router/products.route')
-const productRouters = require ('./router/products.route.db')
-const cartRouters = require('./router/carts.route.db')
+const productRouters = require('./router/products.route')
+//const productRouters = require ('./router/products.route.db')
+const cartRouters = require('./router/carts.route')
+//const cartRouters = require('./router/carts.route.db')
 const homeRouter = require('./router/home.router')
 const realtimeRouter = require('./router/realtime.route')
 

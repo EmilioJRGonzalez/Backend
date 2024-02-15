@@ -36,7 +36,7 @@ const ProductSchema = new mongoose.Schema({
         require: true,
         enum: ['Categoria 1', 'Categoria 2', 'Categoria 3']
     }
-})
+}, { versionKey: false })
 
 const Product = mongoose.model('product', ProductSchema)
 

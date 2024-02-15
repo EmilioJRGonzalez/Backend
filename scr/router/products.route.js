@@ -1,11 +1,13 @@
 const express = require('express')
 const uuid4 = require('uuid4')
 const ProductManager = require('../dao/fileSystem/ProductManager')
+const ProductManagerMongo = require('../dao/db/managers/ProductManagerMongo')
 
 const {Router} = express
 const router = new Router()
 
-let prod = new ProductManager('./scr/dao/fileSystem/data/productos.json')
+//let prod = new ProductManager('./scr/dao/fileSystem/data/productos.json')
+let prod = new ProductManagerMongo
 
 router.get('/', async (req, res) => {
     let aux = await prod.getProducts()
@@ -26,19 +28,9 @@ router.get('/:pid', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    let id = uuid4()
-    let msg = 'Producto guardado'
+    let body = req.body
 
-    let title = req.body.title
-    let description = req.body.description
-    let price = req.body.price
-    let thumbnail = req.body.thumbnail
-    let code = req.body.code
-    let stock = req.body.stock
-    let status = true
-    let category = req.body.category
-
-    let aux = await prod.addProduct(id, title, description, price, thumbnail, code, stock, status, category)
+    let aux = await prod.addProduct(body)
     if (aux.length >0){
         msg = aux;
     }
