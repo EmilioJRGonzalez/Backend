@@ -11,7 +11,6 @@ let prod = new ProductManagerMongo
 
 router.get('/', async (req, res)=> {
     let aux = await prod.getProducts()
-    console.log(aux)
     res.render('home', {products: aux})
 })
 

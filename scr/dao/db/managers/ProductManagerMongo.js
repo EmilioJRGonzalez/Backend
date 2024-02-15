@@ -5,13 +5,13 @@ class ProductManager {
     }
 
     async getProducts(limit){
-        let resp = []
+        let resp
         try{
             resp = await Products.find();
         }catch(err){
             console.log(err)
         }
-        return resp
+        return resp.map(item => item._doc)
     }
 
     async addProduct(body){
@@ -21,7 +21,7 @@ class ProductManager {
             return `El producto '${body.title}' fue agregado correctamente`
         }catch(err){
             console.log (err)
-            return `ERROR: No fue posible dar de alta el producto ${body.code}. ${err}`
+            return `ERROR: No fue posible dar de alta el producto ${body.code}. ${err.toString()}`
         }
     }
 
