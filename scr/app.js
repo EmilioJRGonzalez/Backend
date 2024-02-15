@@ -2,14 +2,18 @@ const express = require ('express')
 const handlebars = require('express-handlebars')
 const ProductManager = require('./dao/fileSystem/ProductManager')
 const ProductManagerMongo = require('./dao/db/managers/ProductManagerMongo')
+const ChatManagerMongo = require('./dao/db/managers/ChatManagerMongo')
 const http = require('http')
 const {Server} = require('socket.io')
 const Database = require('./dao/db/db')
 const app = express()
 const PORT = 8080 || process.env.PORT
 
+let msjs = []
+
 //let prod = new ProductManager('./scr/dao/fileSystem/data/productos.json')
 let prod = new ProductManagerMongo
+let chat = new ChatManagerMongo
 
 const productRouters = require('./router/products.route')
 //const productRouters = require ('./router/products.route.db')
@@ -17,6 +21,7 @@ const cartRouters = require('./router/carts.route')
 //const cartRouters = require('./router/carts.route.db')
 const homeRouter = require('./router/home.router')
 const realtimeRouter = require('./router/realtime.route')
+const chatRouter = require('./router/chat.route')
 
 //SERVER HTTP
 const server = http.createServer(app)
@@ -36,7 +41,7 @@ app.use('/home', homeRouter)
 app.use('/api/product', productRouters)
 app.use('/api/cart', cartRouters)
 app.use('/realtimeproducts', realtimeRouter)
-//app.use('/prod', producRoute)
+app.use('/chat', chatRouter)
 
 function realizarLlamadaPOST(url, datos) {
     return new Promise((resolve, reject) => {
@@ -76,19 +81,32 @@ async function getAllProducts(){
 //SOCKET SERVER
 const io = new Server(server)
 io.on('connection', (socket)=> {
-  console.log('cliente conectado')
+    console.log('cliente conectado')
 
-  socket.on('product-add', async (data)=> {
-    try{
-        await realizarLlamadaPOST(`http://localhost:8080/api/product/`, data);
-        //console.log('Llamada POST exitosa:');
-        let products = await getAllProducts()
-        //console.log("getAllProducts ", products);
-        io.sockets.emit('products-update', products);
-        } catch (error) {
-            console.error('Error en la llamada POST:', error);
-        };
-    });
+    socket.on('product-add', async (data)=> {
+        try{
+            await realizarLlamadaPOST(`http://localhost:8080/api/product/`, data);
+            let products = await getAllProducts()
+            io.sockets.emit('products-update', products);
+            } catch (error) {
+                console.error('Error en la llamada POST:', error);
+            };
+        });
+
+    /*INICIO CHAT*/
+    socket.emit('Mensaje1', 'Bienvenido')
+
+    socket.on('Mensaje2', (data)=>{
+        console.log(data)
+    })
+
+    socket.on('MensajeNuevo', (data)=>{
+        console.log(data)
+        msjs.push(data)
+        chat.AddMessage(JSON.stringify(data))
+        io.sockets.emit('MensajesDelChat', msjs)
+    })
+    /*FIN CHAT*/
 })
   
 server.listen(PORT, ()=> {

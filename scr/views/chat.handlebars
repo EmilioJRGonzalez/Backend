@@ -1,16 +1,16 @@
 <div class="container">
-    <h1>App Socket</h1>
+    <h1>Chat Socket</h1>
     <div class="container caja" id="caja"></div>
 
-    <form >
+    <form onsubmit="return addMessage()">
         <div class="mb-3">
             <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp" placeholder="Tu nombre...">
         </div>
         <div class="mb-3">
-            <textarea class="form-control" id="text" placeholder="Tu mensaje..."></textarea>
+            <textarea class="form-control" id="texto" placeholder="Tu mensaje..."></textarea>
         <input type="submit" value="Enviar" class="btn btn-primary">
     </form>
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="/js/index.js"></script>
+<script src="/js/chat.js"></script>
