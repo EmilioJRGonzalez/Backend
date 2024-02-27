@@ -15,7 +15,7 @@ router.get('/', async (req, res)=> {
     let sort = 1
     let filter
     let aux = await prod.getProducts(limit, page, sort, filter)
-    res.render('home', {products: aux})
+    res.render('home', {products: aux.payload})
 })
 
 module.exports = router

@@ -10,7 +10,7 @@ const router = new Router()
 let prod = new ProductManagerMongo
 
 router.get('/', async (req, res) => {
-    let limit = req.query.limit ? parseInt(req.query.limit) : 3;
+    let limit = req.query.limit ? parseInt(req.query.limit) : 10;
     let page = req.query.page ? parseInt(req.query.page) : 1;
     let sort = (req.query.sort === '1' || req.query.sort === '-1') ? parseInt(req.query.sort) : 1;
     let query = req.query.query

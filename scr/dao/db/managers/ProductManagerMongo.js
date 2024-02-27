@@ -6,12 +6,32 @@ class ProductManager {
 
     async getProducts(limit, page, sort, filter){
         let resp
+        let response
+        let URL = 'http://localhost:8080/api/product'
         try{
             resp = await Products.paginate(filter, {limit, page, sort: {'price': sort}})
+            let payload = resp.docs.map(item => item._doc)
+
+            response = {
+                status: 'success',
+                payload,
+                totalPages: resp.totalPages,
+                prevPage: resp.prevPage,
+                nextPage: resp.nextPage,
+                page: resp.page,
+                hasPrevPage: resp.hasPrevPage,
+                hasNextPage: resp.hasNextPage,
+                prevLink: resp.hasPrevPage ? URL + `?page=${resp.prevPage}`: null,
+                nextLink: resp.hasNextPage ? URL + `?page=${resp.nextPage}`: null,
+            }
         }catch(err){
             console.log(err)
+            response = {
+                status: `error: ${err}`,
+                payload: []
+            }
         }
-        return resp.docs.map(item => item._doc)
+        return response
     }
 
     async addProduct(body){
