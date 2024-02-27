@@ -4,14 +4,14 @@ class ProductManager {
     constructor(){
     }
 
-    async getProducts(limit){
+    async getProducts(limit, page, sort, filter){
         let resp
         try{
-            resp = await Products.find();
+            resp = await Products.paginate(filter, {limit, page, sort: {'price': sort}})
         }catch(err){
             console.log(err)
         }
-        return resp.map(item => item._doc)
+        return resp.docs.map(item => item._doc)
     }
 
     async addProduct(body){
