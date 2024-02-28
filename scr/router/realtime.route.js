@@ -10,8 +10,12 @@ const router = new Router()
 let prod = new ProductManagerMongo
 
 router.get('/', async (req, res)=> {
-    let aux = await prod.getProducts()
-    res.render('realTimeProducts', {products: aux})
+    let limit = 10
+    let page = 1
+    let sort = 1
+    let filter
+    let aux = await prod.getProducts(limit, page, sort, filter)
+    res.render('realTimeProducts', {products: aux.payload})
 })
 
 module.exports = router

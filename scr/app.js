@@ -1,6 +1,5 @@
 const express = require ('express')
 const handlebars = require('express-handlebars')
-const ProductManager = require('./dao/fileSystem/ProductManager')
 const ProductManagerMongo = require('./dao/db/managers/ProductManagerMongo')
 const ChatManagerMongo = require('./dao/db/managers/ChatManagerMongo')
 const http = require('http')
@@ -11,17 +10,15 @@ const PORT = 8080 || process.env.PORT
 
 let msjs = []
 
-//let prod = new ProductManager('./scr/dao/fileSystem/data/productos.json')
 let prod = new ProductManagerMongo
 let chat = new ChatManagerMongo
 
 const productRouters = require('./router/products.route')
-//const productRouters = require ('./router/products.route.db')
 const cartRouters = require('./router/carts.route')
-//const cartRouters = require('./router/carts.route.db')
 const homeRouter = require('./router/home.router')
 const realtimeRouter = require('./router/realtime.route')
 const chatRouter = require('./router/chat.route')
+const productsRouters = require('./router/productsPaginate.route')
 
 //SERVER HTTP
 const server = http.createServer(app)
@@ -29,12 +26,26 @@ const server = http.createServer(app)
 //PUBLIC
 app.use(express.static(__dirname+"/public"))
 
+// Define el helper eq que se usa para el paginado
+const handlebarsHelpers = {
+    eq: function(arg1, arg2, options) {
+        if (arg1 === arg2) {
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
+    }
+};
+
 //ENGINE
-app.engine('handlebars', handlebars.engine())
-app.set('view engine', 'handlebars')
+app.engine('handlebars', handlebars.engine({
+    helpers: handlebarsHelpers // Registra los helpers
+}));
+app.set('view engine', 'handlebars');
 app.set('views', __dirname+'/views')
 
 app.use(express.json())
+
 
 //ROUTES
 app.use('/home', homeRouter)
@@ -42,6 +53,7 @@ app.use('/api/product', productRouters)
 app.use('/api/cart', cartRouters)
 app.use('/realtimeproducts', realtimeRouter)
 app.use('/chat', chatRouter)
+app.use('/products', productsRouters)
 
 function realizarLlamadaPOST(url, datos) {
     return new Promise((resolve, reject) => {
