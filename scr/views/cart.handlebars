@@ -1,0 +1,33 @@
+{{!--  {{products}} --}} 
+
+{{!-- {{ products.quantity }} --}}
+
+{{!-- {{log products}} --}}
+
+{{!-- {{ products.[0].title }}
+{{ products.[0].product.title }} --}}
+
+<div class="container">
+    <h1>Carrito de Compras</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Título</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each products}}
+               {{log this}} <!-- Imprime cada elemento de products en la consola -->
+                <tr>
+                    <td>{{this.quantity}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.quantity}}</td>
+                    <td>{{this.description}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

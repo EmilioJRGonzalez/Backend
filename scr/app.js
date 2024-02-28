@@ -19,6 +19,7 @@ const homeRouter = require('./router/home.router')
 const realtimeRouter = require('./router/realtime.route')
 const chatRouter = require('./router/chat.route')
 const productsRouters = require('./router/productsPaginate.route')
+const cartListRouters = require('./router/cartList.route')
 
 //SERVER HTTP
 const server = http.createServer(app)
@@ -54,6 +55,7 @@ app.use('/api/cart', cartRouters)
 app.use('/realtimeproducts', realtimeRouter)
 app.use('/chat', chatRouter)
 app.use('/products', productsRouters)
+app.use('/cart', cartListRouters)
 
 function realizarLlamadaPOST(url, datos) {
     return new Promise((resolve, reject) => {
