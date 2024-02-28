@@ -22,11 +22,8 @@ router.get('/', async (req, res) => {
 
     let aux = await prod.getProducts(limit, page, sort, filter)
 
-    //console.log(aux)
-
     const arrPages = [];
-
-    // Llena el array con los números desde 1 hasta 'page'
+    // Genero un array con todas las paginas
     for (let i = 1; i <= aux.totalPages; i++) {
         arrPages.push(i);
     }
