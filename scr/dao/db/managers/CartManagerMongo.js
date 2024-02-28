@@ -54,6 +54,16 @@ class CartManager {
         }
     }
 
+    async getCartByIdTest (cid){
+        try{
+            let resp = await Carts.findOne({_id: cid}).populate('products.product');
+            //console.log(resp)
+            return resp == null ? `No se encontró un producto con el id ${cid}` : resp.products
+        }catch(err){
+            return err.toString()
+        }
+    }
+
     async deleteProductFromCart(cid, pid){
         let resp
         let respC

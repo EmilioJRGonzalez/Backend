@@ -1,4 +1,4 @@
-{{!--  {{products}} --}} 
+{{products}}
 
 {{!-- {{ products.quantity }} --}}
 
@@ -22,10 +22,10 @@
             {{#each products}}
                {{log this}} <!-- Imprime cada elemento de products en la consola -->
                 <tr>
-                    <td>{{this.quantity}}</td>
-                    <td>{{this.description}}</td>
-                    <td>{{this.quantity}}</td>
-                    <td>{{this.description}}</td>
+                    <td>{{title}}</td>
+                    <td>{{description}}</td>
+                    <td>$ {{price}}</td>
+                    <td>{{quantity}}</td>
                 </tr>
             {{/each}}
         </tbody>
