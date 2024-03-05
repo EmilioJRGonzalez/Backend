@@ -6,7 +6,15 @@ const router = new Router()
 
 let prod = new ProductManagerMongo
 
-router.get('/', async (req, res) => {
+function auth(req, res, next){
+    if(req.session.email){
+        next()
+    }else{
+        res.send("Ud. no tiene permisos para acceder a esta página")
+    }
+}
+
+router.get('/', auth, async (req, res) => {
     let limit = req.query.limit ? parseInt(req.query.limit) : 10;
     let page = req.query.page ? parseInt(req.query.page) : 1;
     let sort = (req.query.sort === '1' || req.query.sort === '-1') ? parseInt(req.query.sort) : 1;
@@ -28,7 +36,7 @@ router.get('/', async (req, res) => {
         arrPages.push(i);
     }
 
-    res.render('products', { products: aux.payload, totalPages: aux.totalPages, prevPage: aux.prevPage, nextPage: aux.nextPage, page: aux.page, pages: arrPages});
+    res.render('products', { products: aux.payload, totalPages: aux.totalPages, prevPage: aux.prevPage, nextPage: aux.nextPage, page: aux.page, pages: arrPages, session: req.session});
 })
 
 module.exports  = router

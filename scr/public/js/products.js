@@ -42,3 +42,30 @@ function addToCart(productId) {
   });
   return false
 }
+
+function logout() {
+    const requestData = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+  
+    // Realiza una solicitud GET al endpoint de logout
+    fetch('http://localhost:8080/auth/logout')
+    .then(response => {
+        if (response.ok) {
+            alert('Sesión cerrada exitosamente');
+            if (response.redirected){
+                window.location.href = response.url;
+            }
+        } else {
+            alert('Error al cerrar sesión');
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        alert('Error al procesar la solicitud');
+    });
+    //return false
+  }

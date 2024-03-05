@@ -6,8 +6,6 @@ const router = new Router()
 let users = []
 
 router.post('/register', (req, res) => {
-    console.log("register")
-    console.log(req.body)
     let userNew = req.body
     userNew.id = Math.random()
     users.push(userNew)
