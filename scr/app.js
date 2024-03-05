@@ -1,12 +1,24 @@
-const express = require ('express')
+const express = require('express')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
 const handlebars = require('express-handlebars')
 const ProductManagerMongo = require('./dao/db/managers/ProductManagerMongo')
 const ChatManagerMongo = require('./dao/db/managers/ChatManagerMongo')
 const http = require('http')
 const {Server} = require('socket.io')
 const Database = require('./dao/db/db')
-const app = express()
 const PORT = 8080 || process.env.PORT
+
+const app = express()
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: 'mongodb+srv://emiliojrg88:pBMHOMINd1WpdtGd@coder.q3bmoe2.mongodb.net/ecommerce'
+    }),
+    secret: 'secretEcommerce',
+    resave: true,
+    saveUninitialized: true
+}))
+
 
 let msjs = []
 
@@ -20,6 +32,8 @@ const realtimeRouter = require('./router/realtime.route')
 const chatRouter = require('./router/chat.route')
 const productsRouters = require('./router/productsPaginate.route')
 const cartListRouters = require('./router/cartList.route')
+const viewsRouter = require('./router/views.route')
+const authRouter = require('./router/auth.route')
 
 //SERVER HTTP
 const server = http.createServer(app)
@@ -46,6 +60,7 @@ app.set('view engine', 'handlebars');
 app.set('views', __dirname+'/views')
 
 app.use(express.json())
+app.use(express.urlencoded({extended:false}))
 
 
 //ROUTES
@@ -56,6 +71,8 @@ app.use('/realtimeproducts', realtimeRouter)
 app.use('/chat', chatRouter)
 app.use('/products', productsRouters)
 app.use('/cart', cartListRouters)
+app.use('/view', viewsRouter)
+app.use('/auth', authRouter)
 
 function realizarLlamadaPOST(url, datos) {
     return new Promise((resolve, reject) => {
