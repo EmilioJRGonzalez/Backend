@@ -56,7 +56,7 @@ class CartManager {
 
     async getCartByIdTest (cid){
         try{
-            let resp = await Carts.findOne({_id: cid}).populate('products.product');
+            let resp = await Carts.findOne({_id: cid}).populate('products.product').lean();
             //console.log(resp)
             return resp == null ? `No se encontró un producto con el id ${cid}` : resp.products
         }catch(err){
