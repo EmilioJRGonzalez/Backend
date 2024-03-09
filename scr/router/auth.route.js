@@ -26,6 +26,7 @@ router.post('/login', async (req, res) => {
         req.session.password = userLogin.password
         console.log("ROL: ", userFound.user_type)
         req.session.rol = userFound.user_type
+        //req.session.rol = (userLogin.email === 'adminCoder@coder.com' && userLogin.password === 'adminCod3r123') ? 'admin' : 'usuario';
 
         res.redirect('/products')
         return
