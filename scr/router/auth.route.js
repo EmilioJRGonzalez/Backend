@@ -1,29 +1,31 @@
 const express = require('express')
+const UserManagerMongo = require('../dao/db/managers/UserManagerMongo')
 
 const {Router} = express
 const router = new Router()
 
-let users = []
+let user = new UserManagerMongo
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
     let userNew = req.body
-    userNew.id = Math.random()
-    users.push(userNew)
+
+    let aux = await user.addUser(userNew)
+    console.log(aux)
 
     res.redirect('/view/login-view')
 })
 
-router.post('/login', (req, res) => {
-    console.log("USERS", users)
+router.post('/login', async (req, res) => {
     let userLogin = req.body
-    let userFound = users.find(user => {
-        return user.email == userLogin.email && user.password == userLogin.password
-    })
+
+    let userFound = await user.userExist(userLogin.email, userLogin.password)
+    console.log(userFound)
 
     if (userFound){
         req.session.email = userLogin.email
         req.session.password = userLogin.password
-        req.session.rol = (userLogin.email === 'adminCoder@coder.com' && userLogin.password === 'adminCod3r123') ? 'admin' : 'usuario';
+        console.log("ROL: ", userFound.user_type)
+        req.session.rol = userFound.user_type
 
         res.redirect('/products')
         return

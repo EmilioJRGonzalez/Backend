@@ -1,20 +1,19 @@
-
 <div class="container shadow-lg p-5 mt-5 bg-body rounded">
     <form class="row g-3" action="/auth/register" method="post">
       <div class="col-md-6">
-        <input type="text" id="first_name" name="first_name" class="form-control" placeholder="Nombre" aria-label="Nombre">
+        <input type="text" id="first_name" name="first_name" class="form-control" placeholder="Nombre" aria-label="Nombre" required>
       </div>
       <div class="col-md-6">
-        <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Apellido" aria-label="Apellido">
+        <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Apellido" aria-label="Apellido" required>
       </div>
 
       <div class="col-md-6">
         <label for="exampleInputEmail1" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
       </div>
       <div class="col-md-6">
         <label for="exampleInputPassword1" class="form-label">Clave</label>
-        <input type="password" class="form-control" id="password" name="password">
+        <input type="password" class="form-control" id="password" name="password" required>
       </div>
       <button type="submit" class="btn btn-primary mt-3">Enviar</button>
     </form>

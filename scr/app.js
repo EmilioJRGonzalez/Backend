@@ -34,6 +34,7 @@ const productsRouters = require('./router/productsPaginate.route')
 const cartListRouters = require('./router/cartList.route')
 const viewsRouter = require('./router/views.route')
 const authRouter = require('./router/auth.route')
+const startRouter = require('./router/start.route')
 
 //SERVER HTTP
 const server = http.createServer(app)
@@ -73,6 +74,7 @@ app.use('/products', productsRouters)
 app.use('/cart', cartListRouters)
 app.use('/view', viewsRouter)
 app.use('/auth', authRouter)
+app.use('/', startRouter)
 
 function realizarLlamadaPOST(url, datos) {
     return new Promise((resolve, reject) => {

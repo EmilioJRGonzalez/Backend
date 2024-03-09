@@ -1,15 +1,19 @@
 <div class="container shadow-lg p-5 mt-5 bg-body rounded">
+    <h2 class="text-center mb-3">Inicio de Sesión</h2>
     <form action="/auth/login" method="post">
       <div class="col-12">
-        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <label for="exampleInputEmail1" class="form-label">Correo Electrónico</label>
         <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
       </div>
       <div class="col-12">
-        <label for="exampleInputPassword1" class="form-label">Clave</label>
+        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
         <input type="password" class="form-control" id="password" name="password">
       </div>
       <button type="submit" class="btn btn-primary mt-3">Ingresar</button>
     </form>
+    <div class="text-center mt-3">
+      <p>¿No tienes una cuenta? <a href="/view/register-view">Regístrate aquí</a></p>
+    </div>
 </div>
 
 
