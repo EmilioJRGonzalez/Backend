@@ -40,8 +40,8 @@ router.get('/logout', (req, res) => {
     res.redirect('/view/login-view')
 })
 
-router.get('/user', (req, res) => {
+/* router.get('/user', (req, res) => {
     res.send(users)
-})
+}) */
 
 module.exports = router
