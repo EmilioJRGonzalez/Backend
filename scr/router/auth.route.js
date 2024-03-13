@@ -42,6 +42,22 @@ router.get('/logout', (req, res) => {
     res.redirect('/view/login-view')
 })
 
+router.get('/github', passport.authenticate("github", {}),  async (req, res) => {
+})
+
+router.get('/callbackGithub', passport.authenticate("github", {}),  async (req, res) => {
+
+    /* req.session.usuario = req.user
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(200).json({payload:req.user}); */
+
+    req.session.email = req.user.email
+    console.log("req: ", req.user)
+    req.session.rol = 'usuario'
+
+    res.redirect('/products')
+})
+
 /* router.get('/user', (req, res) => {
     res.send(users)
 }) */

@@ -5,6 +5,7 @@ const handlebars = require('express-handlebars')
 const ProductManagerMongo = require('./dao/db/managers/ProductManagerMongo')
 const ChatManagerMongo = require('./dao/db/managers/ChatManagerMongo')
 const initializePassport = require('./passport/passport')
+const initializePassportGithub = require('./passport/passport.github')
 const passport = require('passport')
 const http = require('http')
 const {Server} = require('socket.io')
@@ -66,6 +67,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
 initializePassport()
+initializePassportGithub()
 app.use(passport.initialize())
 
 //ROUTES

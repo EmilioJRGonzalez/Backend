@@ -24,7 +24,10 @@ const UserSchema = new mongoose.Schema({
         enum: ['admin', 'usuario'],
         default: 'usuario'
     }
-}, { versionKey: false })
+},
+{ 
+    timestamps: true,
+    versionKey: false })
 
 const User = mongoose.model('user', UserSchema)
 
