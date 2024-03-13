@@ -1,5 +1,6 @@
 const express = require('express')
 const UserManagerMongo = require('../dao/db/managers/UserManagerMongo')
+const {createHash, isValidPassword} = require('../utils/bcrypt')
 
 const {Router} = express
 const router = new Router()
@@ -7,7 +8,8 @@ const router = new Router()
 let user = new UserManagerMongo
 
 router.post('/register', async (req, res) => {
-    let userNew = req.body
+    let userNew = req.body    
+    userNew.password = createHash(userNew.password)
 
     let aux = await user.addUser(userNew)
     console.log(aux)
@@ -18,10 +20,10 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     let userLogin = req.body
 
-    let userFound = await user.userExist(userLogin.email, userLogin.password)
+    let userFound = await user.userExist(userLogin.email)
     console.log(userFound)
 
-    if (userFound){
+    if (userFound && isValidPassword(userFound, userLogin.password)){
         req.session.email = userLogin.email
         req.session.password = userLogin.password
         console.log("ROL: ", userFound.user_type)

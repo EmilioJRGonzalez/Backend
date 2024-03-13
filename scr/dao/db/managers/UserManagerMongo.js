@@ -15,9 +15,9 @@ class UserManager {
         }
     }
 
-    async userExist(email, password){
+    async userExist(email){
         try{
-            let resp = await Users.findOne({email, password})
+            let resp = await Users.findOne({email})
             return resp;
         }catch(err){
             console.log(err)
