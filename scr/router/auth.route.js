@@ -1,7 +1,11 @@
+//import { generateToken } from '../utils/utils.js'
 const express = require('express')
 const UserManagerMongo = require('../dao/db/managers/UserManagerMongo')
 const {createHash, isValidPassword} = require('../utils/bcrypt')
 const passport = require('passport')
+const { generateToken, authToken } = require('../utils/utils')
+const authII = require('../middleware/auth')
+
 
 const {Router} = express
 const router = new Router()
@@ -20,14 +24,22 @@ router.post('/login', async (req, res) => {
     let userLogin = req.body
 
     let userFound = await user.userExist(userLogin.email)
-    console.log(userFound)
 
     if (userFound && isValidPassword(userFound, userLogin.password)){
         req.session.email = userLogin.email
         req.session.password = userLogin.password
-        console.log("ROL: ", userFound.user_type)
         req.session.rol = userFound.user_type
         //req.session.rol = (userLogin.email === 'adminCoder@coder.com' && userLogin.password === 'adminCod3r123') ? 'admin' : 'usuario';
+
+        delete userLogin.password
+        let token = generateToken(userLogin)
+
+        console.log("TOKEN: ", token)
+
+/*         return res.status(200).json({
+            usuarioLogueado: userLogin,
+            token
+        }) */
 
         res.redirect('/products')
         return
@@ -61,5 +73,14 @@ router.get('/callbackGithub', passport.authenticate("github", {}),  async (req, 
 /* router.get('/user', (req, res) => {
     res.send(users)
 }) */
+
+router.get('/perfil', authII, (req, res)=>{
+
+    res.setHeader('Content-Type', 'application/json')
+    res.status(200).json({
+        mensaje: 'Perfil usuario',
+        usuario: req.user
+    })
+})
 
 module.exports = router
