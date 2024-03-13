@@ -4,6 +4,8 @@ const MongoStore = require('connect-mongo')
 const handlebars = require('express-handlebars')
 const ProductManagerMongo = require('./dao/db/managers/ProductManagerMongo')
 const ChatManagerMongo = require('./dao/db/managers/ChatManagerMongo')
+const initializePassport = require('./passport/passport')
+const passport = require('passport')
 const http = require('http')
 const {Server} = require('socket.io')
 const Database = require('./dao/db/db')
@@ -63,6 +65,8 @@ app.set('views', __dirname+'/views')
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
+initializePassport()
+app.use(passport.initialize())
 
 //ROUTES
 app.use('/home', homeRouter)

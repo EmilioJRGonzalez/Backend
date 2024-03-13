@@ -1,20 +1,19 @@
 const express = require('express')
 const UserManagerMongo = require('../dao/db/managers/UserManagerMongo')
 const {createHash, isValidPassword} = require('../utils/bcrypt')
+const passport = require('passport')
 
 const {Router} = express
 const router = new Router()
 
 let user = new UserManagerMongo
 
-router.post('/register', async (req, res) => {
-    let userNew = req.body    
-    userNew.password = createHash(userNew.password)
-
-    let aux = await user.addUser(userNew)
-    console.log(aux)
-
+router.post('/register', passport.authenticate('register', {failureRedirect: '/auth/failedRegister'}) , async (req, res) => {
     res.redirect('/view/login-view')
+})
+
+router.get('/failedRegister', async (req, res) => {
+    res.send('Error al registrar el usuario')
 })
 
 router.post('/login', async (req, res) => {
