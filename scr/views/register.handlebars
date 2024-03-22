@@ -3,8 +3,19 @@
       <div class="col-md-6">
         <input type="text" id="first_name" name="first_name" class="form-control" placeholder="Nombre" aria-label="Nombre" required>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Apellido" aria-label="Apellido" required>
+      </div>
+
+      <div class="col-md-2">
+        <select id="age" name="age" class="form-select" aria-label="Edad" required>
+            <option value="" selected>Edad</option>
+            <!-- Agrega las opciones de edad aquí -->
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <!-- ... -->
+        </select>
       </div>
 
       <div class="col-md-6">
@@ -19,3 +30,5 @@
     </form>
 </div>
 
+{{!-- Para cargar combo de edad --}}
+<script src="/js/register.js"></script>

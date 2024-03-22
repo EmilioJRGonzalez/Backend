@@ -28,13 +28,13 @@ router.post('/login', async (req, res) => {
     if (userFound && isValidPassword(userFound, userLogin.password)){
         req.session.email = userLogin.email
         req.session.password = userLogin.password
-        req.session.rol = userFound.user_type
+        req.session.rol = userFound.role
         //req.session.rol = (userLogin.email === 'adminCoder@coder.com' && userLogin.password === 'adminCod3r123') ? 'admin' : 'usuario';
 
         delete userLogin.password
         let token = generateToken(userLogin)
 
-        console.log("TOKEN: ", token)
+        /* console.log("TOKEN: ", token) */
 
 /*         return res.status(200).json({
             usuarioLogueado: userLogin,
@@ -65,7 +65,7 @@ router.get('/callbackGithub', passport.authenticate("github", {}),  async (req, 
 
     req.session.email = req.user.email
     console.log("req: ", req.user)
-    req.session.rol = 'usuario'
+    req.session.rol = 'user'
 
     res.redirect('/products')
 })

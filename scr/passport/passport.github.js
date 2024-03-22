@@ -18,7 +18,7 @@ const initPassport=()=>{
                 if(!usuario){
                     usuario = await userModel.create(
                         {
-                            first_name:login, last_name:"", email, password:""
+                            first_name:login, last_name:"", email, age:0, password:""
                         }
                     )
                 }

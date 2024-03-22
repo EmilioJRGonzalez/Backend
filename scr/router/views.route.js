@@ -21,7 +21,7 @@ router.get('/register-view', (req, res) => {
 })
 
 router.get('/profile-view', auth, (req, res) => {
-    res.render('profile')
+    res.render('profile', {session: req.session})
 })
 
 module.exports = router
