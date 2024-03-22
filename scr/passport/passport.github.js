@@ -1,6 +1,10 @@
 const passport = require('passport')
 const github = require('passport-github2')
 const userModel = require('../dao/db/models/user.model')
+const {createHash, isValidPassword} = require('../utils/bcrypt')
+const CartManagerMongo = require('../dao/db/managers/CartManagerMongo')
+
+let cart = new CartManagerMongo
 
 const initPassport=()=>{
 
@@ -12,13 +16,20 @@ const initPassport=()=>{
         },
         async(accessToken, refreshToken, profile, done) => {
             try{
+                console.log(profile)
                 let {email, login} = profile._json
                 email = email || login
                 let usuario = await userModel.findOne({email})
                 if(!usuario){
+                    let cartId = await cart.createCart()
                     usuario = await userModel.create(
                         {
-                            first_name:login, last_name:"", email, age:0, password:""
+                            first_name: login, 
+                            last_name: "", 
+                            email, 
+                            age: 0, 
+                            password: createHash(""),
+                            cart: cartId
                         }
                     )
                 }

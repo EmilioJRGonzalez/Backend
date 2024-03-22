@@ -19,6 +19,7 @@ router.get('/:cid', async (req, res) => {
 
 router.post('/', async (req, res) => {
     let aux = await cart.createCart()
+    aux = `Se creó el carrito con id ${aux}`
     res.send({data:[], message: aux})
 })
 

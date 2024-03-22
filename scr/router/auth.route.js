@@ -29,7 +29,6 @@ router.post('/login', async (req, res) => {
         req.session.email = userLogin.email
         req.session.password = userLogin.password
         req.session.rol = userFound.role
-        //req.session.rol = (userLogin.email === 'adminCoder@coder.com' && userLogin.password === 'adminCod3r123') ? 'admin' : 'usuario';
 
         delete userLogin.password
         let token = generateToken(userLogin)

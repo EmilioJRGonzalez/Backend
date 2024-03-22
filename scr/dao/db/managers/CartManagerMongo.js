@@ -8,7 +8,7 @@ class CartManager {
         try{
             let resp = await Carts.create({products: []})
             console.log(resp)
-            return `Se creó el carrito con id ${resp._id}`
+            return resp._id
     
         }catch(err){
             return err.toString()
