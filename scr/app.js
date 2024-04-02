@@ -28,16 +28,16 @@ let msjs = []
 let prod = new ProductManagerMongo
 let chat = new ChatManagerMongo
 
-const productRouters = require('./router/products.route')
-const cartRouters = require('./router/carts.route')
-const homeRouter = require('./router/home.router')
-const realtimeRouter = require('./router/realtime.route')
-const chatRouter = require('./router/chat.route')
-const productsRouters = require('./router/productsPaginate.route')
-const cartListRouters = require('./router/cartList.route')
-const viewsRouter = require('./router/views.route')
-const authRouter = require('./router/auth.route')
-const startRouter = require('./router/start.route')
+const productRouters = require('./routes/products.route')
+const cartRouters = require('./routes/carts.route')
+const homeRouter = require('./routes/home.router')
+const realtimeRouter = require('./routes/realtime.route')
+const chatRouter = require('./routes/chat.route')
+const productsRouters = require('./routes/productsPaginate.route')
+const cartListRouters = require('./routes/cartList.route')
+const viewsRouter = require('./routes/views.route')
+const authRouter = require('./routes/auth.route')
+const startRouter = require('./routes/start.route')
 
 //SERVER HTTP
 const server = http.createServer(app)
