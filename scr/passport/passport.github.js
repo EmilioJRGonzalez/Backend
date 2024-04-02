@@ -16,7 +16,7 @@ const initPassport=()=>{
         },
         async(accessToken, refreshToken, profile, done) => {
             try{
-                console.log(profile)
+                /* console.log(profile) */
                 let {email, login} = profile._json
                 email = email || login
                 let usuario = await userModel.findOne({email})
