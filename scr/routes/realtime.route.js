@@ -1,6 +1,6 @@
 const express = require('express')
 const ProductManager = require('../models/fileSystem/ProductManager')
-const ProductManagerMongo = require('../models/db/managers/ProductManagerMongo')
+const ProductManagerMongo = require('../controllers/ProductManagerMongo')
 
 const {Router} = express
 

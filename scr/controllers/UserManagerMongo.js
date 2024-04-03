@@ -1,4 +1,4 @@
-const Users = require('../models/user.model')
+const Users = require('../models/db/user.model')
 
 class UserManager {
     constructor(){
