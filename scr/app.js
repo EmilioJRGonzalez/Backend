@@ -1,3 +1,5 @@
+const dotenv = require('dotenv')
+dotenv.config()
 const express = require('express')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
@@ -10,12 +12,12 @@ const passport = require('passport')
 const http = require('http')
 const {Server} = require('socket.io')
 const Database = require('./dao/db/db')
-const PORT = 8080 || process.env.PORT
+const PORT = process.env.PORT
 
 const app = express()
 app.use(session({
     store: MongoStore.create({
-        mongoUrl: 'mongodb+srv://emiliojrg88:pBMHOMINd1WpdtGd@coder.q3bmoe2.mongodb.net/ecommerce'
+        mongoUrl: process.env.MONGO_URL
     }),
     secret: 'secretEcommerce',
     resave: true,
@@ -28,16 +30,16 @@ let msjs = []
 let prod = new ProductManagerMongo
 let chat = new ChatManagerMongo
 
-const productRouters = require('./routes/products.route')
-const cartRouters = require('./routes/carts.route')
-const homeRouter = require('./routes/home.router')
-const realtimeRouter = require('./routes/realtime.route')
-const chatRouter = require('./routes/chat.route')
-const productsRouters = require('./routes/productsPaginate.route')
-const cartListRouters = require('./routes/cartList.route')
-const viewsRouter = require('./routes/views.route')
-const authRouter = require('./routes/auth.route')
-const startRouter = require('./routes/start.route')
+const routerProduct = require('./routes/products.route')
+const routerCart = require('./routes/carts.route')
+const routerHome = require('./routes/home.router')
+const routerRealtime = require('./routes/realtime.route')
+const routerChat = require('./routes/chat.route')
+const routerProducts = require('./routes/productsPaginate.route')
+const routerCartList = require('./routes/cartList.route')
+const routerViews = require('./routes/views.route')
+const routerAuth = require('./routes/auth.route')
+const routerStart = require('./routes/start.route')
 
 //SERVER HTTP
 const server = http.createServer(app)
@@ -71,16 +73,16 @@ initializePassportGithub()
 app.use(passport.initialize())
 
 //ROUTES
-app.use('/home', homeRouter)
-app.use('/api/product', productRouters)
-app.use('/api/cart', cartRouters)
-app.use('/realtimeproducts', realtimeRouter)
-app.use('/chat', chatRouter)
-app.use('/products', productsRouters)
-app.use('/cart', cartListRouters)
-app.use('/view', viewsRouter)
-app.use('/auth', authRouter)
-app.use('/', startRouter)
+app.use('/home', routerHome)
+app.use('/api/product', routerProduct)
+app.use('/api/cart', routerCart)
+app.use('/realtimeproducts', routerRealtime)
+app.use('/chat', routerChat)
+app.use('/products', routerProducts)
+app.use('/cart', routerCartList)
+app.use('/view', routerViews)
+app.use('/auth', routerAuth)
+app.use('/', routerStart)
 
 function realizarLlamadaPOST(url, datos) {
     return new Promise((resolve, reject) => {
