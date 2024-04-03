@@ -1,8 +1,8 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-const userModel = require('../dao/db/models/user.model')
+const userModel = require('../models/db/models/user.model')
 const {createHash, isValidPassword} = require('../utils/bcrypt')
-const CartManagerMongo = require('../dao/db/managers/CartManagerMongo')
+const CartManagerMongo = require('../models/db/managers/CartManagerMongo')
 
 let cart = new CartManagerMongo
 

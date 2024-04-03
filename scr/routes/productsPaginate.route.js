@@ -1,5 +1,5 @@
 const express = require('express')
-const ProductManagerMongo = require('../dao/db/managers/ProductManagerMongo')
+const ProductManagerMongo = require('../models/db/managers/ProductManagerMongo')
 
 const {Router} = express
 const router = new Router()

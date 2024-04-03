@@ -1,17 +1,16 @@
-const dotenv = require('dotenv')
-dotenv.config()
+require('dotenv').config();
 const express = require('express')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const handlebars = require('express-handlebars')
-const ProductManagerMongo = require('./dao/db/managers/ProductManagerMongo')
-const ChatManagerMongo = require('./dao/db/managers/ChatManagerMongo')
+const ProductManagerMongo = require('./models/db/managers/ProductManagerMongo')
+const ChatManagerMongo = require('./models/db/managers/ChatManagerMongo')
 const initializePassport = require('./passport/passport')
 const initializePassportGithub = require('./passport/passport.github')
 const passport = require('passport')
 const http = require('http')
 const {Server} = require('socket.io')
-const Database = require('./dao/db/db')
+const Database = require('./models/db/db')
 const PORT = process.env.PORT
 
 const app = express()

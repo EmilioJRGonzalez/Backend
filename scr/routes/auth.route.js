@@ -1,6 +1,6 @@
 //import { generateToken } from '../utils/utils.js'
 const express = require('express')
-const UserManagerMongo = require('../dao/db/managers/UserManagerMongo')
+const UserManagerMongo = require('../models/db/managers/UserManagerMongo')
 const {createHash, isValidPassword} = require('../utils/bcrypt')
 const passport = require('passport')
 const { generateToken, authToken } = require('../utils/utils')
