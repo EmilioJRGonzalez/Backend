@@ -1,4 +1,4 @@
-require('dotenv').config();
+const CONFIG = require('./config/config');
 const express = require('express')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
@@ -11,12 +11,12 @@ const passport = require('passport')
 const http = require('http')
 const {Server} = require('socket.io')
 const Database = require('./models/db/db')
-const PORT = process.env.PORT
+const PORT = CONFIG.PORT
 
 const app = express()
 app.use(session({
     store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URL
+        mongoUrl: CONFIG.MONGO_URL
     }),
     secret: 'secretEcommerce',
     resave: true,
