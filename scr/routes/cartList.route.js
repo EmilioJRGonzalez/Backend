@@ -9,7 +9,7 @@ let cart = new CartManagerMongo
 router.get('/:cid', async (req, res) => {
     let cid = req.params.cid
 
-    let aux = await cart.getCartByIdTest(cid)
+    let aux = await cart.getCartById(cid)
 
     res.render('cart', { products: aux });
 })

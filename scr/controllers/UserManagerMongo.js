@@ -1,4 +1,5 @@
-const Users = require('../models/db/user.model')
+const UserService = require('../services/UserService')
+let user = new UserService
 
 class UserManager {
     constructor(){
@@ -7,7 +8,7 @@ class UserManager {
     async addUser(body){
         let resp
         try{
-            resp = await Users.create(body)
+            resp = await user.createUser(body)
             return `El usuario '${body.email}' fue creado correctamente`
         }catch(err){
             console.log (err)
@@ -17,7 +18,7 @@ class UserManager {
 
     async userExist(email){
         try{
-            let resp = await Users.findOne({email})
+            let resp = await user.findOneUser(email)
             return resp;
         }catch(err){
             console.log(err)
