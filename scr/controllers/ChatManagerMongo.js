@@ -1,4 +1,5 @@
-const Chats = require('../models/db/chat.model')
+const ChatService = require('../services/ChatService')
+let chat = new ChatService
 
 class ChatManager {
     constructor(){
@@ -7,7 +8,7 @@ class ChatManager {
     async AddMessage(msj){
         console.log("Inside ChatManager", msj)
         try{
-            let resp = await Chats.create({messages: msj})
+            let resp = await chat.create(msj)
             console.log("RESP: ", resp)    
         }catch(err){
             console.log("ERR: ", err)   

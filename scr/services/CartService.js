@@ -1,6 +1,6 @@
 const Carts = require('../models/db/cart.model')
 
-class CartManager {
+class CartService {
     constructor(){
     }
 
@@ -59,5 +59,5 @@ class CartManager {
   
 }
 
-module.exports = CartManager
+module.exports = CartService
 

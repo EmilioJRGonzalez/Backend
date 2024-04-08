@@ -1,5 +1,8 @@
 const Products = require('../models/db/product.model')
 
+const ProductService = require('../services/ProductService')
+let product = new ProductService
+
 class ProductManager {
     constructor(){
     }
@@ -9,7 +12,7 @@ class ProductManager {
         let response
         let URL = 'http://localhost:8080/api/product'
         try{
-            resp = await Products.paginate(filter, {limit, page, sort: {'price': sort}})
+            resp = await product.getProductsPaginate(limit, page, sort, filter)
             let payload = resp.docs.map(item => item._doc)
 
             response = {
@@ -37,7 +40,8 @@ class ProductManager {
     async addProduct(body){
         let resp
         try{
-            resp = await Products.create(body)
+            resp = await product.createProduct(body)
+            console.log(resp)
             return `El producto '${body.title}' fue agregado correctamente`
         }catch(err){
             console.log (err)
@@ -47,8 +51,8 @@ class ProductManager {
 
     async getProductById (id){
         try{
-            let resp = await Products.findOne({_id: id})
-                return resp
+            let resp = await product.findOneProduct(id)
+            return resp
         }catch(err){
             console.log(err)
             return err
@@ -57,7 +61,7 @@ class ProductManager {
 
     async deleteProduct (id){
         try{
-            let resp = await Products.deleteOne({_id: id})
+            let resp = await product.deleteOneProduct(id)
             if (resp.deletedCount === 1){
                 return `El producto con el id ${id} fue eliminado correctamente`
             } else {
@@ -81,7 +85,7 @@ class ProductManager {
                 ...(body.category !== undefined && { category: body.category })
             };
     
-            const resp = await Products.updateOne({_id: id}, update);
+            const resp = await product.updateOneProduct(id, update);
     
             return resp.matchedCount === 1 ? `El producto con el codigo ${id} fue actualizado` : `Error: No fue actualizado el producto con el codigo ${id}`
         }catch(err){

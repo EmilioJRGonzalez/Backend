@@ -1,4 +1,3 @@
-const Carts = require('../services/CartService')
 const CartService = require('../services/CartService')
 let cart = new CartService
 
@@ -49,7 +48,7 @@ class CartManager {
 
     async getCartByIdTest (cid){
         try{
-            let resp = await Carts.findOne({_id: cid})
+            let resp = await cart.findOneCart(cid)
             return resp == null ? `No se encontró un producto con el id ${cid}` : resp
         }catch(err){
             return err.toString()
