@@ -63,4 +63,15 @@ router.delete('/:cid', async (req, res) => {
     res.send({data:[], message: aux})
 })
 
+router.get('/:cid/purchase', async (req, res) => {
+    let cid = req.params.cid
+    let aux = await cart.getCartById(cid)
+    console.log(typeof aux)
+    if (typeof aux == 'object'){
+        res.send({data:aux, message: ''})
+    }else{
+        res.send({data:[], message: aux})
+    }
+})
+
 module.exports  = router

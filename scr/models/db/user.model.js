@@ -22,12 +22,8 @@ const UserSchema = new mongoose.Schema({
         require: true
     },    
     cart: {
-        type:{
-            cart: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "cart"
-            }
-        }
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "cart"
     },
     role: {
         type: String,
@@ -38,7 +34,8 @@ const UserSchema = new mongoose.Schema({
 },
 { 
     timestamps: true,
-    versionKey: false })
+    versionKey: false
+})
 
 const User = mongoose.model('user', UserSchema)
 

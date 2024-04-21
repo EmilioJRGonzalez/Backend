@@ -29,6 +29,7 @@ router.post('/login', async (req, res) => {
         req.session.email = userLogin.email
         req.session.password = userLogin.password
         req.session.rol = userFound.role
+        req.session.cart = userFound.cart
 
         delete userLogin.password
         let token = generateToken(userLogin)

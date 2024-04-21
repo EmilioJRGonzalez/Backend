@@ -11,7 +11,7 @@ router.get('/:cid', async (req, res) => {
 
     let aux = await cart.getCartById(cid)
 
-    res.render('cart', { products: aux });
+    res.render('cart', { products: aux, cartID: cid });
 })
 
 module.exports  = router

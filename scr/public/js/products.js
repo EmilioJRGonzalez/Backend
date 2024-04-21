@@ -20,6 +20,7 @@ function showMessage(message, isSuccess) {
 
 // Función para enviar una solicitud POST al servidor
 function addToCart(productId) {
+  const cartId = document.getElementById('cartButton').getAttribute('data-cart-id');
   const requestData = {
       method: 'POST',
       headers: {
@@ -29,7 +30,7 @@ function addToCart(productId) {
   };
 
   // Realiza una solicitud POST al endpoint del carrito (con el carrito harcodeado por ahora)
-  fetch(`http://localhost:8080/api/cart/65dec2e636f72bbab52b7fa3/product/${productId}`, requestData)
+  fetch(`http://localhost:8080/api/cart/${cartId}/product/${productId}`, requestData)
   .then(response => {
       if (response.ok) {
           showMessage('Producto agregado al carrito', true);
