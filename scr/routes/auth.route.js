@@ -32,14 +32,7 @@ router.post('/login', async (req, res) => {
         req.session.cart = userFound.cart
 
         delete userLogin.password
-        let token = generateToken(userLogin)
-
-        /* console.log("TOKEN: ", token) */
-
-/*         return res.status(200).json({
-            usuarioLogueado: userLogin,
-            token
-        }) */
+        //let token = generateToken(userLogin)
 
         res.redirect('/products')
         return

@@ -1,4 +1,5 @@
 const express = require('express')
+const authII = require('../middleware/auth')
 const ProductManagerMongo = require('../controllers/ProductManagerMongo')
 
 const {Router} = express

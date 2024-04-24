@@ -8,7 +8,7 @@ class ChatManager {
     async AddMessage(msj){
         console.log("Inside ChatManager", msj)
         try{
-            let resp = await chat.create(msj)
+            let resp = await chat.createMessage(msj)
             console.log("RESP: ", resp)    
         }catch(err){
             console.log("ERR: ", err)   

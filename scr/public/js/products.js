@@ -29,7 +29,7 @@ function addToCart(productId) {
       body: JSON.stringify({ productId: productId })
   };
 
-  // Realiza una solicitud POST al endpoint del carrito (con el carrito harcodeado por ahora)
+  // Realiza una solicitud POST al endpoint del carrito
   fetch(`http://localhost:8080/api/cart/${cartId}/product/${productId}`, requestData)
   .then(response => {
       if (response.ok) {

@@ -12,6 +12,15 @@ class UserService {
         }
     }
 
+    async findOneUser(email){
+        try{
+            return await Users.findOne({email});
+        }catch(err){
+            return err
+        }
+
+    }
+
 }
 
 module.exports = UserService

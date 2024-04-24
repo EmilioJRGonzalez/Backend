@@ -1,16 +1,8 @@
 const express = require('express')
+const authII = require('../middleware/auth')
 
 const {Router} = express
 const router = new Router()
-
-function auth(req, res, next){
-    console.log("SESSION ", req.session.email)
-    if(req.session.email){
-        next()
-    }else{
-        res.send("Ud. no tiene permisos para acceder a esta página")
-    }
-}
 
 router.get('/login-view', (req, res) => {
     res.render('login')
@@ -20,7 +12,7 @@ router.get('/register-view', (req, res) => {
     res.render('register')
 })
 
-router.get('/profile-view', auth, (req, res) => {
+router.get('/profile-view', authII, (req, res) => {
     res.render('profile', {session: req.session})
 })
 

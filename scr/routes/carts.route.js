@@ -1,4 +1,5 @@
 const express = require('express')
+const authII = require('../middleware/auth')
 const CONFIG = require('../config/config')
 const { generateRandomValue } = require('../utils/crypto')
 const transporter = require('../utils/mail')
@@ -31,7 +32,7 @@ router.post('/', async (req, res) => {
     res.send({data:[], message: aux})
 })
 
-router.post('/:cid/product/:pid', async (req, res) => {
+router.post('/:cid/product/:pid',  authII, async (req, res) => {
     let cid = req.params.cid
     let pid = req.params.pid
 

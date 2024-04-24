@@ -1,18 +1,19 @@
 const { generateToken, authToken } = require('../utils/utils')
 
 const authII=(req, res, next)=> {
-    if (!req.headers["authorization"]){
-        res.setHeader('Content-Type', 'application/json')
-        return res.status(401).json({error: 'Usuario no autenticado'})
+
+    if (!req.session || !req.session.rol || !req.session.email) {
+        return res.send("Ud. no tiene permisos para acceder a esta página")
     }
 
-    let token = req.headers["authorization"].split(" ")[1]
-    try{
-        let usuario = authToken(token)
-        req.user=usuario
-    }catch(err){
-        res.setHeader('Content-Type', 'application/json')
-        return res.status(401).json({error: err.message})
+    console.log(req.path, req.baseUrl, req.method, req.session.rol )
+
+/*     if (req.path === '/products' && req.method === 'GET' && rol === 'user') {
+        return res.send("Ud no tiene permisos para acceder a esta ruta")
+    } */
+
+    if (req.baseUrl === '/api/cart' && req.method === 'POST' && req.session.rol != 'user') {
+        return res.send("Ud no tiene permisos para acceder a esta ruta")
     }
 
     next()
