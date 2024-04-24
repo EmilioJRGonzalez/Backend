@@ -1,4 +1,5 @@
 const express = require('express')
+const authII = require('../middleware/auth')
 const ProductManager = require('../models/fileSystem/ProductManager')
 const ProductManagerMongo = require('../controllers/ProductManagerMongo')
 
@@ -9,7 +10,7 @@ const router = new Router()
 //let prod = new ProductManager('./scr/models/fileSystem/data/productos.json')
 let prod = new ProductManagerMongo
 
-router.get('/', async (req, res)=> {
+router.get('/', authII, async (req, res)=> {
     let limit = 10
     let page = 1
     let sort = 1

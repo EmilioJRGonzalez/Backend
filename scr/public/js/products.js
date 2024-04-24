@@ -31,14 +31,17 @@ function addToCart(productId) {
 
   // Realiza una solicitud POST al endpoint del carrito
   fetch(`http://localhost:8080/api/cart/${cartId}/product/${productId}`, requestData)
-  .then(response => {
+  .then(async response => {
+      const data = await response.json();
       if (response.ok) {
           showMessage('Producto agregado al carrito', true);
       } else {
+          console.log(data.meesage)
           showMessage('Error al agregar el producto al carrito', false);
       }
   })
   .catch(error => {
+      console.log(error)
       showMessage('Error al procesar la solicitud', false);
   });
   return false
