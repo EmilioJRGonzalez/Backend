@@ -11,7 +11,7 @@ const router = new Router()
 let prod = new ProductManagerMongo
 
 router.get('/', authII, async (req, res)=> {
-    let limit = 10
+    let limit = 100
     let page = 1
     let sort = 1
     let filter

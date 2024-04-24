@@ -111,8 +111,8 @@ function realizarLlamadaPOST(url, datos) {
 
 async function getAllProducts(){
     try {
-        let resultado = await prod.getProducts()
-        return resultado
+        let resultado = await prod.getProducts(100,1,1,null)
+        return resultado.payload
     } catch (error) {
         console.error('Error al obtener los datos:', error);
     }
