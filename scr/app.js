@@ -39,6 +39,7 @@ const routerCartList = require('./routes/cartList.route')
 const routerViews = require('./routes/views.route')
 const routerAuth = require('./routes/auth.route')
 const routerStart = require('./routes/start.route')
+const routerMocking = require('./routes/mocking.route')
 
 //SERVER HTTP
 const server = http.createServer(app)
@@ -82,6 +83,7 @@ app.use('/cart', routerCartList)
 app.use('/view', routerViews)
 app.use('/auth', routerAuth)
 app.use('/', routerStart)
+app.use('/mockingproducts', routerMocking)
 
 function realizarLlamadaPOST(url, datos) {
     return new Promise((resolve, reject) => {
