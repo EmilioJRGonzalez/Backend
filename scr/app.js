@@ -12,6 +12,7 @@ const http = require('http')
 const {Server} = require('socket.io')
 const Database = require('./models/db/db')
 const PORT = CONFIG.PORT
+const compression = require('express-compression')
 
 const app = express()
 app.use(session({
@@ -67,6 +68,7 @@ app.set('views', __dirname+'/views')
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
+app.use(compression())
 
 initializePassport()
 initializePassportGithub()
