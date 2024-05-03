@@ -1,4 +1,3 @@
-const { generateToken, authToken } = require('../utils/utils')
 
 const authII=(req, res, next)=> {
 

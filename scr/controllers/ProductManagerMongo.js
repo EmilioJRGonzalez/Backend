@@ -1,4 +1,6 @@
-const Products = require('../models/db/product.model')
+const CustomError = require('../middleware/Err/CustomError.js')
+const EErrors = require('../middleware/Err/ErrorsEnum.js')
+const { insertProductErrorInfo } = require ('../services/errors/produc-creation-error.message.js')
 
 const ProductService = require('../services/ProductService')
 let product = new ProductService
@@ -39,7 +41,17 @@ class ProductManager {
 
     async addProduct(body){
         let resp
+
         try{
+            if (!body.title || !body.description || !body.price || !body.thumbnail || !body.code || !['Categoria 1', 'Categoria 2', 'Categoria 3'].includes(body.category)) {
+                CustomError.createError({
+                    name: "Product creation Error",
+                    cause: insertProductErrorInfo(body),
+                    message: "Error al tratar de alta un producto",
+                    code: EErrors.INVALID_TYPES_ERROR
+                })
+        }
+        //try{
             resp = await product.createProduct(body)
             console.log(resp)
             return `El producto '${body.title}' fue agregado correctamente`

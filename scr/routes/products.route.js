@@ -1,6 +1,6 @@
 const express = require('express')
-const authII = require('../middleware/auth')
 const ProductManagerMongo = require('../controllers/ProductManagerMongo')
+const errorHandler = require ('../middleware/errHandler')
 
 const {Router} = express
 const router = new Router()
@@ -64,5 +64,6 @@ router.put('/:id', async (req, res) => {
 
 })
 
+router.use(errorHandler);
 
 module.exports  = router
