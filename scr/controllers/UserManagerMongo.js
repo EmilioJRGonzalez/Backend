@@ -11,7 +11,7 @@ class UserManager {
             resp = await user.createUser(body)
             return `El usuario '${body.email}' fue creado correctamente`
         }catch(err){
-            console.log (err)
+            console.warn(err)
             return `ERROR: No fue posible dar de alta el usuario ${body.email}. ${err.toString()}`
         }
     }
@@ -21,7 +21,7 @@ class UserManager {
             let resp = await user.findOneUser(email)
             return resp;
         }catch(err){
-            console.log(err)
+            console.debug(err)
             return err
         }
     }

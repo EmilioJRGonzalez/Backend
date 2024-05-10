@@ -11,7 +11,7 @@ class TicketManager {
             resp = await ticket.createTicket(data)
             return `El ticket '${data.code}' fue creado correctamente`
         }catch(err){
-            console.log (err)
+            console.warn(err)
             return `ERROR: No fue posible guardar la compra ${data.code}. ${err.toString()}`
         }
     }

@@ -5,7 +5,7 @@ class CustomError {
         error.name = name;
         error.code = code;
         error.cause = cause ? new Error(cause) : null
-        console.log("CUSTOMERROR",message, name,code,cause)
+        console.debug("CUSTOMERROR",message, name,code,cause)
 
         throw error;
     }

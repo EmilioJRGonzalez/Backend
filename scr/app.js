@@ -1,4 +1,4 @@
-const CONFIG = require('./config/config');
+const CONFIG = require('./config/config')
 const express = require('express')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
@@ -13,6 +13,7 @@ const {Server} = require('socket.io')
 const Database = require('./models/db/db')
 const PORT = CONFIG.PORT
 const compression = require('express-compression')
+const { addLogger } = require('./config/logger.js')
 
 const app = express()
 app.use(session({
@@ -41,6 +42,7 @@ const routerViews = require('./routes/views.route')
 const routerAuth = require('./routes/auth.route')
 const routerStart = require('./routes/start.route')
 const routerMocking = require('./routes/mocking.route')
+const routerLog = require('./routes/log.route')
 
 //SERVER HTTP
 const server = http.createServer(app)
@@ -69,6 +71,7 @@ app.set('views', __dirname+'/views')
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(compression())
+app.use(addLogger)
 
 initializePassport()
 initializePassportGithub()
@@ -86,6 +89,7 @@ app.use('/view', routerViews)
 app.use('/auth', routerAuth)
 app.use('/', routerStart)
 app.use('/mockingproducts', routerMocking)
+app.use('/loggertest', routerLog)
 
 function realizarLlamadaPOST(url, datos) {
     return new Promise((resolve, reject) => {

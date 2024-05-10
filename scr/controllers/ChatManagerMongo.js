@@ -9,9 +9,9 @@ class ChatManager {
         console.log("Inside ChatManager", msj)
         try{
             let resp = await chat.createMessage(msj)
-            console.log("RESP: ", resp)    
+            console.debug(resp)
         }catch(err){
-            console.log("ERR: ", err)   
+            console.warn(err)
         }
     }
 }

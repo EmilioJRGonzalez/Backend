@@ -30,7 +30,7 @@ class ProductManager {
                 nextLink: resp.hasNextPage ? URL + `?page=${resp.nextPage}`: null,
             }
         }catch(err){
-            console.log(err)
+            console.warn(err)
             response = {
                 status: `error: ${err}`,
                 payload: []
@@ -53,10 +53,10 @@ class ProductManager {
         }
         //try{
             resp = await product.createProduct(body)
-            console.log(resp)
+            console.debug(err)
             return `El producto '${body.title}' fue agregado correctamente`
         }catch(err){
-            console.log (err)
+            console.warn(err)
             return `ERROR: No fue posible dar de alta el producto ${body.code}. ${err.toString()}`
         }
     }
@@ -66,7 +66,7 @@ class ProductManager {
             let resp = await product.findOneProduct(id)
             return resp
         }catch(err){
-            console.log(err)
+            console.warn(err)
             return err
         }
     }
@@ -80,7 +80,7 @@ class ProductManager {
                 return `Error: No se encontró un producto con el id ${id}`
             }
         }catch(err){
-            console.log(err)
+            console.warn(err)
             return err
         }
     }
@@ -101,7 +101,7 @@ class ProductManager {
     
             return resp.matchedCount === 1 ? `El producto con el codigo ${id} fue actualizado` : `Error: No fue actualizado el producto con el codigo ${id}`
         }catch(err){
-            console.log(err)
+            console.warn(err)
             return err
         }
 

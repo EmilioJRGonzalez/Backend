@@ -8,10 +8,11 @@ class CartManager {
     async createCart(){
         try{
             let resp = await cart.createEmptyCart()
-            console.log(resp)
+            console.debug(resp)
             return resp._id
     
         }catch(err){
+            console.warn(err)
             return err.toString()
         }
     }
@@ -42,6 +43,7 @@ class CartManager {
             return aux
 
         }catch(err){
+            console.warn(err)
             return err.toString()
         }
     }
@@ -60,6 +62,7 @@ class CartManager {
             let resp = await cart.findOneCartAndPopulate(cid)
             return resp == null ? `No se encontró un carrito con el id ${cid}` : resp.products
         }catch(err){
+            console.warn(err)
             return err.toString()
         }
     }
@@ -87,7 +90,7 @@ class CartManager {
                 }
             }
         }catch(err){
-            console.log("ERR: ", err)
+            console.warn(err)
             aux = err.toString()
         }
 
@@ -98,7 +101,7 @@ class CartManager {
         let aux
         try {        
             const result = await cart.updateOneCartWithProducts(cid, body)
-            console.log(result)
+            console.debug(result)
         
             if (result.modifiedCount > 0) {
                 aux = `Se actualizaron los productos del carrito ${cid}`
@@ -134,7 +137,7 @@ class CartManager {
         try {
             const result = await cart.updateOneCart(cid, [])
 
-            console.log(result, cid)
+            console.debug(result, cid)
         
             if (result.modifiedCount > 0) {
                 aux = `Se borraron todos los productos del carrito ${cid}`
