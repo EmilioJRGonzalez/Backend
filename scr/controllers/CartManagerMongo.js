@@ -2,17 +2,18 @@ const CartService = require('../services/CartService')
 let cart = new CartService
 
 class CartManager {
-    constructor(){
+    constructor(logger) {
+        this.logger = logger
     }
 
     async createCart(){
         try{
             let resp = await cart.createEmptyCart()
-            console.debug(resp)
+            this.logger.debug(`${JSON.stringify(result)}`)
             return resp._id
     
         }catch(err){
-            console.warn(err)
+            this.logger.warning(err.toString())
             return err.toString()
         }
     }
@@ -43,7 +44,7 @@ class CartManager {
             return aux
 
         }catch(err){
-            console.warn(err)
+            this.logger.warning(err.toString())
             return err.toString()
         }
     }
@@ -62,7 +63,7 @@ class CartManager {
             let resp = await cart.findOneCartAndPopulate(cid)
             return resp == null ? `No se encontró un carrito con el id ${cid}` : resp.products
         }catch(err){
-            console.warn(err)
+            this.logger.warning(err.toString())
             return err.toString()
         }
     }
@@ -90,7 +91,7 @@ class CartManager {
                 }
             }
         }catch(err){
-            console.warn(err)
+            this.logger.warning(err.toString())
             aux = err.toString()
         }
 
@@ -101,7 +102,7 @@ class CartManager {
         let aux
         try {        
             const result = await cart.updateOneCartWithProducts(cid, body)
-            console.debug(result)
+            this.logger.debug(`${JSON.stringify(result)}`)
         
             if (result.modifiedCount > 0) {
                 aux = `Se actualizaron los productos del carrito ${cid}`
@@ -137,7 +138,7 @@ class CartManager {
         try {
             const result = await cart.updateOneCart(cid, [])
 
-            console.debug(result, cid)
+            this.logger.debug(`${JSON.stringify(result)}, ${cid}`)
         
             if (result.modifiedCount > 0) {
                 aux = `Se borraron todos los productos del carrito ${cid}`

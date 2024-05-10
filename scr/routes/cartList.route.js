@@ -4,9 +4,8 @@ const CartManagerMongo = require('../controllers/CartManagerMongo')
 const {Router} = express
 const router = new Router()
 
-let cart = new CartManagerMongo
-
 router.get('/:cid', async (req, res) => {
+    let cart = new CartManagerMongo(req.logger)
     let cid = req.params.cid
 
     let aux = await cart.getCartById(cid)

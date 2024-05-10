@@ -6,7 +6,8 @@ const ProductService = require('../services/ProductService')
 let product = new ProductService
 
 class ProductManager {
-    constructor(){
+    constructor(logger) {
+        this.logger = logger
     }
 
     async getProducts(limit, page, sort, filter){
@@ -30,7 +31,7 @@ class ProductManager {
                 nextLink: resp.hasNextPage ? URL + `?page=${resp.nextPage}`: null,
             }
         }catch(err){
-            console.warn(err)
+            this.logger.warning(err.toString())
             response = {
                 status: `error: ${err}`,
                 payload: []
@@ -53,10 +54,10 @@ class ProductManager {
         }
         //try{
             resp = await product.createProduct(body)
-            console.debug(err)
+            this.logger.debug(`${JSON.stringify(resp)}`)
             return `El producto '${body.title}' fue agregado correctamente`
         }catch(err){
-            console.warn(err)
+            this.logger.warning(err.toString())
             return `ERROR: No fue posible dar de alta el producto ${body.code}. ${err.toString()}`
         }
     }
@@ -64,9 +65,10 @@ class ProductManager {
     async getProductById (id){
         try{
             let resp = await product.findOneProduct(id)
+            this.logger.debug(`${JSON.stringify(resp)}`)
             return resp
         }catch(err){
-            console.warn(err)
+            this.logger.debug(err.toString())
             return err
         }
     }
@@ -80,7 +82,7 @@ class ProductManager {
                 return `Error: No se encontró un producto con el id ${id}`
             }
         }catch(err){
-            console.warn(err)
+            this.logger.warning(err.toString())
             return err
         }
     }
@@ -101,7 +103,7 @@ class ProductManager {
     
             return resp.matchedCount === 1 ? `El producto con el codigo ${id} fue actualizado` : `Error: No fue actualizado el producto con el codigo ${id}`
         }catch(err){
-            console.warn(err)
+            this.logger.warning(err.toString())
             return err
         }
 

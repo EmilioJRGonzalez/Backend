@@ -11,14 +11,14 @@ const html = require('../utils/plantillaMail.js')
 const {Router} = express
 const router = new Router()
 
-let cart = new CartManagerMongo
 let prod = new ProductManagerMongo
 let tik = new TicketManagerMongo
 
 router.get('/:cid', async (req, res) => {
+    let cart = new CartManagerMongo(req.logger)
     let cid = req.params.cid
     let aux = await cart.getCartById(cid)
-    console.log(typeof aux)
+    req.logger.debug(typeof aux)
     if (typeof aux == 'object'){
         res.send({data:aux, message: ''})
     }else{
@@ -27,12 +27,14 @@ router.get('/:cid', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+    let cart = new CartManagerMongo(req.logger)
     let aux = await cart.createCart()
     aux = `Se creó el carrito con id ${aux}`
     res.send({data:[], message: aux})
 })
 
 router.post('/:cid/product/:pid',  authII, async (req, res) => {
+    let cart = new CartManagerMongo(req.logger)
     let cid = req.params.cid
     let pid = req.params.pid
 
@@ -41,6 +43,7 @@ router.post('/:cid/product/:pid',  authII, async (req, res) => {
 })
 
 router.delete('/:cid/product/:pid', async (req, res) => {
+    let cart = new CartManagerMongo(req.logger)
     let cid = req.params.cid
     let pid = req.params.pid
 
@@ -49,6 +52,7 @@ router.delete('/:cid/product/:pid', async (req, res) => {
 })
 
 router.put('/:cid', async (req, res) => {
+    let cart = new CartManagerMongo(req.logger)
     let cid = req.params.cid
     let body = req.body
 
@@ -57,6 +61,7 @@ router.put('/:cid', async (req, res) => {
 })
 
 router.put('/:cid/products/:pid', async (req, res) => {
+    let cart = new CartManagerMongo(req.logger)
     let cid = req.params.cid
     let pid = req.params.pid
     let quantity = req.body.quantity
@@ -66,6 +71,7 @@ router.put('/:cid/products/:pid', async (req, res) => {
 })
 
 router.delete('/:cid', async (req, res) => {
+    let cart = new CartManagerMongo(req.logger)
     let cid = req.params.cid
 
     let aux = await cart.clearCart(cid)
@@ -73,6 +79,7 @@ router.delete('/:cid', async (req, res) => {
 })
 
 router.get('/:cid/purchase', async (req, res) => {
+    let cart = new CartManagerMongo(req.logger)
     let cid = req.params.cid
     let cartData = await cart.getCartById(cid)
 

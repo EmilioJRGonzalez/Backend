@@ -5,9 +5,8 @@ const errorHandler = require ('../middleware/errHandler')
 const {Router} = express
 const router = new Router()
 
-let prod = new ProductManagerMongo
-
 router.get('/', async (req, res) => {
+    let prod = new ProductManagerMongo(req.logger)
     let limit = req.query.limit ? parseInt(req.query.limit) : 10;
     let page = req.query.page ? parseInt(req.query.page) : 1;
     let sort = (req.query.sort === '1' || req.query.sort === '-1') ? parseInt(req.query.sort) : 1;
@@ -26,6 +25,7 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:pid', async (req, res) => {
+    let prod = new ProductManagerMongo(req.logger)
     let pid = req.params.pid
     let aux = await prod.getProductById(pid)
     if (!aux){
@@ -35,6 +35,7 @@ router.get('/:pid', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+    let prod = new ProductManagerMongo(req.logger)
     let body = req.body
 
     let aux = await prod.addProduct(body)
@@ -45,7 +46,8 @@ router.post('/', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res) => {
-    console.log(req.params)
+    let prod = new ProductManagerMongo(req.logger)
+    req.logger.debug(req.params)
     let id = req.params.id
 
     let aux = await prod.deleteProduct(id)
@@ -55,6 +57,7 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
+    let prod = new ProductManagerMongo(req.logger)
     let id = req.params.id
     let body = req.body
 

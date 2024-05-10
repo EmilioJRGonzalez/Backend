@@ -57,7 +57,7 @@ router.get('/callbackGithub', passport.authenticate("github", {}),  async (req, 
     return res.status(200).json({payload:req.user}); */
 
     req.session.email = req.user.email
-    console.log("req: ", req.user)
+    req.logger.debug(req.user)
     req.session.rol = 'user'
 
     res.redirect('/products')
