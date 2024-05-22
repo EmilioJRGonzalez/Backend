@@ -21,19 +21,41 @@ class UserService {
 
     }
 
-    async updatePassword(email, newPassword) {
+    async findUserById(uid){
+        try{
+            return await Users.findOne({_id: uid});
+        }catch(err){
+            return err
+        }
+
+    }
+
+    async updateUserRoleById(uid, newRole) {
         try {
-            const user = await Users.findOne({ email });
-    
-            if (user) {
-                user.password = newPassword;
-                await user.save();
-                return user;
-            } else {
-                return 'Usuario no encontrado';
-            }
+            const updatedUser = await Users.findByIdAndUpdate(
+                {_id: uid},
+                { role: newRole },
+                { new: true } // Esto asegura que se devuelva el documento actualizado
+            );
+            return updatedUser;
         } catch (err) {
             return err;
+        }
+    }
+
+    async updatePassword(email, newPassword) {
+        try {
+            const user = await Users.findOne({ email })
+    
+            if (user) {
+                user.password = newPassword
+                await user.save()
+                return user
+            } else {
+                return 'Usuario no encontrado'
+            }
+        } catch (err) {
+            return err
         }
     }
 

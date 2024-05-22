@@ -26,6 +26,16 @@ class UserManager {
         }
     }
 
+    async updateUserRole(uid, newRole){
+        try{
+            let resp = await user.updateUserRoleById(uid, newRole)
+            return resp;
+        }catch(err){
+            console.debug(err)
+            return err
+        }
+    }
+
     async updateUserPassword(email, password){
         try{
             let resp = await user.updatePassword(email, password)

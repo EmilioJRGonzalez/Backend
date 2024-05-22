@@ -36,8 +36,8 @@ function addToCart(productId) {
       if (response.ok) {
           showMessage('Producto agregado al carrito', true);
       } else {
-          console.log(data.meesage)
-          showMessage('Error al agregar el producto al carrito', false);
+          console.log(data.message)
+          showMessage('Error al agregar el producto al carrito. ' + data.message, false);
       }
   })
   .catch(error => {

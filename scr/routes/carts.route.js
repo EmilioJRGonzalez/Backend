@@ -38,6 +38,16 @@ router.post('/:cid/product/:pid',  authII, async (req, res) => {
     let cid = req.params.cid
     let pid = req.params.pid
 
+    req.logger.debug(req.session.rol)
+
+    if (req.session.rol == 'premium'){
+        let productData = await prod.getProductById(pid)
+
+        if (req.session.email == productData.owner){
+            return res.status(400).send({data:[], message: "Ud no puede agregar este producto"});
+        }
+    }
+
     let aux = await cart.addProductToCart(cid, pid)
     res.send({data:[], message: aux})
 })

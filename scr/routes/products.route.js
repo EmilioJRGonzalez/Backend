@@ -49,8 +49,9 @@ router.delete('/:id', async (req, res) => {
     let prod = new ProductManagerMongo(req.logger)
     req.logger.debug(req.params)
     let id = req.params.id
+    let user = req.body.user
 
-    let aux = await prod.deleteProduct(id)
+    let aux = await prod.deleteProduct(id, user)
     console.log(aux)
 
     res.send({data:[], message: aux})

@@ -160,7 +160,7 @@ router.post('/forgot-password', async (req, res) => {
                     <button onclick="window.location.href='/view/login-view'">Ir a inicio de sesión</button>
                 </body>
             </html>
-        `);
+        `)
     } catch (error) {
         res.send(`
             <html>
@@ -172,6 +172,22 @@ router.post('/forgot-password', async (req, res) => {
             </html>
         `);
     }
-});
+})
+
+router.post('/premium/:uid', async (req, res) => {
+    let uid = req.params.uid
+    let role = req.body.role
+    let aux
+
+    const validRoles = ['user', 'premium'];
+
+    if (validRoles.includes(role)) {
+        aux = await user.updateUserRole(uid, role)
+    }else{
+        return res.status(400).send({data: aux, message: `No se puede modificar el Rol a ${role}`})
+    }
+
+    res.send({data: aux, message: "Rol actualizado correctamente"})
+})
 
 module.exports = router

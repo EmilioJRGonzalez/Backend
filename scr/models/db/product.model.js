@@ -36,6 +36,10 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         require: true,
         enum: ['Categoria 1', 'Categoria 2', 'Categoria 3']
+    },
+    owner: {
+        type: String,
+        default: 'admin'
     }
 }, { versionKey: false })
 
