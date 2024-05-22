@@ -26,6 +26,16 @@ class UserManager {
         }
     }
 
+    async updateUserPassword(email, password){
+        try{
+            let resp = await user.updatePassword(email, password)
+            return resp;
+        }catch(err){
+            console.debug(err)
+            return err
+        }
+    }
+
 }
 
 module.exports = UserManager

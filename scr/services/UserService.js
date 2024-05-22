@@ -21,6 +21,22 @@ class UserService {
 
     }
 
+    async updatePassword(email, newPassword) {
+        try {
+            const user = await Users.findOne({ email });
+    
+            if (user) {
+                user.password = newPassword;
+                await user.save();
+                return user;
+            } else {
+                return 'Usuario no encontrado';
+            }
+        } catch (err) {
+            return err;
+        }
+    }
+
 }
 
 module.exports = UserService

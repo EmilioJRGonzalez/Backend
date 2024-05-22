@@ -1,10 +1,11 @@
-//import { generateToken } from '../utils/utils.js'
+const CONFIG = require('../config/config')
 const express = require('express')
 const UserManagerMongo = require('../controllers/UserManagerMongo')
 const {createHash, isValidPassword} = require('../utils/bcrypt')
 const passport = require('passport')
 const { generateToken, authToken } = require('../utils/utils')
 const authII = require('../middleware/auth')
+const transporter = require('../utils/mail')
 
 
 const {Router} = express
@@ -75,5 +76,102 @@ router.get('/perfil', authII, (req, res)=>{
         usuario: req.user
     })
 })
+
+router.post('/forgot-password', async (req, res) => {
+    let userLogin = req.body
+    let userFound = await user.userExist(userLogin.email)
+
+    if (!userFound) {
+        return res.status(400).send('Usuario no encontrado')
+    }
+
+    let token = generateToken({email: userLogin.email}, '1h')
+    let resetLink = `http://localhost:${CONFIG.PORT}/view/reset_password-view/${token}`
+
+    console.log("resetLink", resetLink )
+
+    let mensaje = await transporter.sendMail({
+        from: `Ecommerce test ${CONFIG.MAIL_USER}`,
+        to: userLogin.email,
+        subject: 'CODERHOUSE: Restablecimiento de contraseña',
+        text: 'Restablecimiento de contraseña',
+        html: `<p>Para restablecer tu contraseña, haz clic en el siguiente enlace:</p>
+        <a href="${resetLink}">Restablecer contraseña</a>
+        <p>El enlace expirará en 1 hora.</p>` 
+    })
+    if(!!mensaje.messageId){
+        console.log('Correo de restablecimiento enviado', mensaje.messageId)
+    }
+  
+    res.send('Correo de restablecimiento enviado');
+  });
+
+  router.post('/reset-password/:token', async (req, res) => {
+    let token = req.params.token
+    let newPassword = req.body.newPassword
+    let confirmPassword = req.body.confirmPassword
+
+    if (newPassword !== confirmPassword) {
+        return res.send(`
+            <html>
+                <body>
+                    <h1>Error</h1>
+                    <p>Las contraseñas no coinciden. Por favor, inténtalo de nuevo.</p>
+                    <button onclick="window.history.back()">Volver</button>
+                </body>
+            </html>
+        `);
+    }
+
+    let payload = authToken(token)
+    console.log("payload", payload)
+    let email = payload.email
+
+    let userFound = await user.userExist(payload.email)
+
+    if (!userFound) {
+        return res.status(400).send('Usuario no encontrado')
+    }
+
+    if (userFound && isValidPassword(userFound, newPassword)){
+        return res.send(`
+            <html>
+                <body>
+                    <h1>Error</h1>
+                    <p>No se puede colocar la misma contraseña. Por favor, inténtalo de nuevo.</p>
+                    <button onclick="window.history.back()">Volver</button>
+                </body>
+            </html>
+        `);
+    }
+
+    try {
+        const hashedPassword = createHash(newPassword)
+        console.log(hashedPassword)
+
+        let resp = user.updateUserPassword(email, hashedPassword)
+        console.log(resp)
+        
+        res.send(`
+            <html>
+                <body>
+                    <h1>Contraseña restablecida correctamente</h1>
+                    <p>Tu contraseña ha sido actualizada con éxito.</p>
+                    <button onclick="window.location.href='/view/login-view'">Ir a inicio de sesión</button>
+                </body>
+            </html>
+        `);
+    } catch (error) {
+        res.send(`
+            <html>
+                <body>
+                    <h1>Error al reestablecer la contraseña</h1>
+                    <p>Intentelo nuevamente.</p>
+                    <button onclick="window.history.back()">Volver</button>
+                </body>
+            </html>
+        `);
+    }
+});
 
 module.exports = router
