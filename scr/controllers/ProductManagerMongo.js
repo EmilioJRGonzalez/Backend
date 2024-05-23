@@ -90,7 +90,7 @@ class ProductManager {
                     return `Error: No se encontró un producto con el id ${id}`
                 }
             }else{
-                return `Error: No se eliminó el producto con el id ${id}`
+                return `Error: No se eliminó el producto con el id ${id}. ${runUpdate.msg}`
             }
         }catch(err){
             this.logger.warning(err.toString())
@@ -100,14 +100,19 @@ class ProductManager {
 
     async updateProduct (id, body){
         let runUpdate = {data: false, msg: ''}
+        let resp
         try{
-            let userFound = await user.findOneUser(body.email)
+            if (body.email){
+                let userFound = await user.findOneUser(body.email)
 
-            if (!userFound){
-                return `Error: No se encontró el usuario ${email}`
-            }
-
-            runUpdate = this.update(id, email)
+                if (!userFound){
+                    return `Error: No se encontró el usuario ${body.email}`
+                }
+                runUpdate = await this.update(id, email)
+            }else if (Object.keys(body).length === 1 && 'stock' in body){
+                //Si no mandan el usuario solo permito actualizar el stock porque es una compra
+                runUpdate.data = true
+            }           
 
             if (runUpdate.data){
                 const update = {
@@ -120,21 +125,22 @@ class ProductManager {
                     ...(body.category !== undefined && { category: body.category })
                 };
         
-                const resp = await product.updateOneProduct(id, update);
+                resp = await product.updateOneProduct(id, update)
             }else{
                 return `Error: No se actualizó el producto con el id ${id}`
             }
-    
+ 
             return resp.matchedCount === 1 ? `El producto con el codigo ${id} fue actualizado` : `Error: No fue actualizado el producto con el codigo ${id}`
         }catch(err){
-            this.logger.warning(err.toString())
+            //this.logger.warning(err.toString())
+            console.log(err.toString())
             return err
         }
 
     }
 
     async update (id, email){
-        let runUpdate = {data: false, msg: ''}
+        let runUpdate = {data: false, msg: 'Ud. no tiene permisos'}
 
         let userFound = await user.findOneUser(email)
         let prod = await product.findOneProduct(id)

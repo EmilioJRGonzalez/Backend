@@ -1,7 +1,7 @@
 
 const authII=(req, res, next)=> {
 
-    req.logger.debug(req.session.rol, !req.session.email)
+    req.logger.debug(req.session.rol + ' - ' + req.session.email)
 
     if (!req.session || !req.session.rol || !req.session.email) {
         return res.send("Ud. no tiene permisos para acceder a esta página")

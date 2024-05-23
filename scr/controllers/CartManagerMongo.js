@@ -9,11 +9,13 @@ class CartManager {
     async createCart(){
         try{
             let resp = await cart.createEmptyCart()
-            this.logger.debug(`${JSON.stringify(result)}`)
+            console.log(resp)
+            //this.logger.debug(`${JSON.stringify(resp)}`)
             return resp._id
     
         }catch(err){
-            this.logger.warning(err.toString())
+            //this.logger.warning(err.toString())
+            console.log(err.toString())
             return err.toString()
         }
     }
