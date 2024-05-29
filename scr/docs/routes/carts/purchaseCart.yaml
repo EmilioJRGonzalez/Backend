@@ -1,7 +1,7 @@
 paths:
-  /api/cart/{cid}/product/{pid}:
-    post:
-      summary: Agrega un producto a un carrito
+  /api/cart/{cid}/purchase:
+    get:
+      summary: Genera la compra de un carrito
       tags:
         - Carritos
       parameters:
@@ -11,15 +11,9 @@ paths:
           description: id del carrito
           schema:
             $type: String
-        - name: pid
-          in: path
-          required: true
-          description: id del producto a agregar
-          schema:
-            $type: String
       responses:
         "200":
-          description: Respuesta, si pudo agregar el producto al carrito o no
+          description: Respuesta, si pudo realizar la compra o no
           content:
             application/json:
               schema:

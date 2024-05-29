@@ -1,7 +1,7 @@
 paths:
   /api/cart/{cid}/product/{pid}:
-    post:
-      summary: Agrega un producto a un carrito
+    delete:
+      summary: Elimina un producto de un carrito
       tags:
         - Carritos
       parameters:
@@ -14,13 +14,15 @@ paths:
         - name: pid
           in: path
           required: true
-          description: id del producto a agregar
+          description: id del producto a eliminar
           schema:
             $type: String
       responses:
         "200":
-          description: Respuesta, si pudo agregar el producto al carrito o no
+          description: Respuesta, si pudo eliminar el producto del carrito o no
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Messages'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Messages'

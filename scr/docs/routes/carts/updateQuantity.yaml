@@ -1,0 +1,39 @@
+paths:
+  /api/cart/{cid}/products/{pid}:
+    put:
+      summary: Actualiza la cantidad de un producto en un carrito
+      tags:
+        - Carritos
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito
+          schema:
+            $type: String
+        - name: pid
+          in: path
+          required: true
+          description: id del producto a actualizar
+          schema:
+            $type: String
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+                  description: Cantidad del producto que se va a actualizar en el carrito
+                  example: 30
+              required:
+                - quantity
+      responses:
+        "200":
+          description: Respuesta, si pudo actualizar la cantidad o no.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Messages'
