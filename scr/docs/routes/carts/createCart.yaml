@@ -1,0 +1,15 @@
+paths:
+  /api/cart/:
+    post:
+      summary: Crea un carrito
+      tags:
+        - Carritos
+      responses:
+        "200":
+          description: Un carrito, si lo creó correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Messages'

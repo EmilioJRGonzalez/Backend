@@ -11,4 +11,4 @@ components:
           description: Respuesta de la operacion
       example:
         data: []
-        message: "El producto con el id 665682068da5fe34e96a6421 fue eliminado correctamente"    
+        message: "El producto con el id 665682068da5fe34e96a6421 fue xx correctamente"    

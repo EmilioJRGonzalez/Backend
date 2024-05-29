@@ -1,0 +1,21 @@
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        products:
+          type: array
+          description: Lista de productos en el carrito
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                description: ID del producto
+                format: ObjectId
+              quantity:
+                type: number
+                description: Cantidad del producto en el carrito
+                default: 1
+      required:
+        - products
