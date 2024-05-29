@@ -1,0 +1,26 @@
+paths:
+  /api/product/{id}:
+    put:
+      summary: Actualiza un producto
+      tags:
+        - Productos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id del producto a actualizar
+          schema:
+            $type: String
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/UpdateProduct'
+      responses:
+        "200":
+          description: Respuesta, si pudo actualizar el producto o no.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Messages'

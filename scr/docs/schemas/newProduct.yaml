@@ -1,0 +1,51 @@
+# NewProduct
+components:
+  requestBodies:
+    NewProduct:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Nombre del producto
+        description:
+          type: string
+          description: Descripcion del producto
+        price:
+          type: number
+          description: Precio del producto
+        thumbnail:
+          type: array
+          description: Imagen/es del producto
+          items:
+            type: string
+        code:
+          type: string
+          description: Codigo unico del producto
+        stock:
+          type: number
+          description: Stock actual del producto
+        status:
+          type: boolean
+          description: Estado del producto (activo o inactivo)
+        category:
+          type: string
+          description: Categoria del producto
+          enum:
+            - "Categoria 1"
+            - "Categoria 2"
+            - "Categoria 3"
+        owner:
+          type: string
+          description: Usuario que dio de alta el producto
+      example:
+        title: "Product Title"
+        description: "Product Description"
+        price: 99.99
+        thumbnail: ["thumbnail1.jpg"]
+        code: "PROD123"
+        stock: 10
+        status: true
+        category: "Categoria 1"
+        owner: "adminCoder@coder.com"
+
+    

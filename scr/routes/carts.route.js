@@ -103,7 +103,7 @@ router.get('/:cid/purchase', async (req, res) => {
             console.log("CART", item.product.title, "PRICE", item.product.price, "CANT", item.quantity, "STOCK", productData.stock)
 
             if (productData.stock >= item.quantity) {
-                let body = {stock: productData.stock -= item.quantity};
+                let body = {stock: productData.stock -= item.quantity}
                 //let body = {stock: 15};
                 let a = await prod.updateProduct(item.product._id, body)
                 total += item.product.price * item.quantity;

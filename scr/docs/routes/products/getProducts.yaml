@@ -1,0 +1,22 @@
+paths:
+  /api/product:
+    get:
+      summary: Devuelve todos los productos
+      tags:
+        - Productos
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          required: false
+          description: Número máximo de productos a devolver (por defecto, 10)
+      responses:
+        "200":
+          description: Todos los productos disponibles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'

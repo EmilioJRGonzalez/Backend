@@ -1,0 +1,22 @@
+paths:
+  /api/product/{pid}:
+    get:
+      summary: Busca un producto por Id
+      tags:
+        - Productos
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del producto a buscar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Un producto, si lo encuentra.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'

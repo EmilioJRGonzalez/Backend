@@ -14,6 +14,8 @@ const Database = require('./models/db/db')
 const PORT = CONFIG.PORT
 const compression = require('express-compression')
 const { addLogger } = require('./config/logger.js')
+const swaggerUi = require("swagger-ui-express")
+const { swaggerSpecs } = require('./utils/swaggerSpecs.js')
 
 const app = express()
 app.use(session({
@@ -91,6 +93,9 @@ app.use('/', routerStart)
 app.use('/mockingproducts', routerMocking)
 app.use('/loggertest', routerLog)
 
+//DOCUMENTATION
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+
 function realizarLlamadaPOST(url, datos) {
     return new Promise((resolve, reject) => {
         const opciones = {
@@ -141,7 +146,7 @@ io.on('connection', (socket)=> {
             };
         });
 
-    /*INICIO CHAT*/
+    /*START CHAT*/
     socket.emit('Mensaje1', 'Bienvenido')
 
     socket.on('Mensaje2', (data)=>{
@@ -154,7 +159,7 @@ io.on('connection', (socket)=> {
         chat.AddMessage(JSON.stringify(data))
         io.sockets.emit('MensajesDelChat', msjs)
     })
-    /*FIN CHAT*/
+    /*END CHAT*/
 })
   
 server.listen(PORT, ()=> {

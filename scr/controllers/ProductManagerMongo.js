@@ -108,7 +108,7 @@ class ProductManager {
                 if (!userFound){
                     return `Error: No se encontró el usuario ${body.email}`
                 }
-                runUpdate = await this.update(id, email)
+                runUpdate = await this.update(id, body.email)
             }else if (Object.keys(body).length === 1 && 'stock' in body){
                 //Si no mandan el usuario solo permito actualizar el stock porque es una compra
                 runUpdate.data = true
@@ -155,10 +155,10 @@ class ProductManager {
         }
 
         if (userFound.role == 'admin'){
-            runUpdate.data = true
+            runUpdate = {data: true, msg: ''}
         }
         else if (userFound.role == 'premium' && prod.owner == email){
-            runUpdate.data = true
+            runUpdate = {data: true, msg: ''}
         }
 
         console.log("runUpdate1", runUpdate)
