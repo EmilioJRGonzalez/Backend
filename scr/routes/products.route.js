@@ -1,9 +1,8 @@
-const express = require('express')
-const ProductManagerMongo = require('../controllers/ProductManagerMongo')
-const errorHandler = require ('../middleware/errHandler')
+import express from 'express'
+import ProductManagerMongo from '../controllers/ProductManagerMongo.js'
+import errorHandler from '../middleware/errHandler.js'
 
-const {Router} = express
-const router = new Router()
+const router = express.Router()
 
 router.get('/', async (req, res) => {
     let prod = new ProductManagerMongo(req.logger)
@@ -68,6 +67,6 @@ router.put('/:id', async (req, res) => {
 
 })
 
-router.use(errorHandler);
+router.use(errorHandler)
 
-module.exports  = router
+export default router

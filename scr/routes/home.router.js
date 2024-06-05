@@ -1,9 +1,8 @@
-const express = require('express')
-const ProductManager = require('../models/fileSystem/ProductManager')
-const ProductManagerMongo = require('../controllers/ProductManagerMongo')
+import express from 'express'
+import ProductManager from '../models/fileSystem/ProductManager.js'
+import ProductManagerMongo from '../controllers/ProductManagerMongo.js'
 
-const {Router} = express
-
+const { Router } = express
 const router = new Router()
 
 //let prod = new ProductManager('./scr/models/fileSystem/data/productos.json')
@@ -18,4 +17,4 @@ router.get('/', async (req, res)=> {
     res.render('home', {products: aux.payload})
 })
 
-module.exports = router
+export default router

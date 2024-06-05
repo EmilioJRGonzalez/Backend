@@ -1,6 +1,6 @@
-const fs = require('fs');
+import fs from 'fs/promises'
 
-class ProductManager {
+export default class ProductManager {
     constructor(path){
         this.products = [];
         this.id = 0;
@@ -149,8 +149,6 @@ class ProductManager {
         }
     }
 }
-
-module.exports = ProductManager
 
 
 //const product = new ProductManager('productos.json');

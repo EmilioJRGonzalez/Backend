@@ -1,13 +1,14 @@
-const CustomError = require('../middleware/Err/CustomError.js')
-const EErrors = require('../middleware/Err/ErrorsEnum.js')
-const { insertProductErrorInfo } = require ('../services/errors/produc-creation-error.message.js')
+import CustomError from '../middleware/Err/CustomError.js'
+import EErrors from '../middleware/Err/ErrorsEnum.js'
+import { insertProductErrorInfo } from '../services/errors/produc-creation-error.message.js'
 
-const ProductService = require('../services/ProductService')
-const UserService = require('../services/UserService.js')
+import ProductService from '../services/ProductService.js'
+import UserService from '../services/UserService.js'
+
 let product = new ProductService
 let user = new UserService
 
-class ProductManager {
+export default class ProductManager {
     constructor(logger) {
         this.logger = logger
     }
@@ -166,5 +167,3 @@ class ProductManager {
     }
 
 }
-
-module.exports = ProductManager

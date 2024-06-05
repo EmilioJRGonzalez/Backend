@@ -1,17 +1,16 @@
-const CONFIG = require('../config/config')
-const express = require('express')
-const UserManagerMongo = require('../controllers/UserManagerMongo')
-const {createHash, isValidPassword} = require('../utils/bcrypt')
-const passport = require('passport')
-const { generateToken, authToken } = require('../utils/utils')
-const authII = require('../middleware/auth')
-const transporter = require('../utils/mail')
+import express from 'express'
+import passport from 'passport'
+import UserManagerMongo from '../controllers/UserManagerMongo.js'
+import { createHash, isValidPassword } from '../utils/bcrypt.js'
+import { generateToken, authToken } from '../utils/utils.js'
+import authII from '../middleware/auth.js'
+import transporter from '../utils/mail.js'
+import CONFIG from '../config/config.js'
 
-
-const {Router} = express
+const { Router } = express
 const router = new Router()
 
-let user = new UserManagerMongo
+const user = new UserManagerMongo()
 
 router.post('/register', passport.authenticate('register', {failureRedirect: '/auth/failedRegister'}) , async (req, res) => {
     res.redirect('/view/login-view')
@@ -190,4 +189,4 @@ router.post('/premium/:uid', async (req, res) => {
     res.send({data: aux, message: "Rol actualizado correctamente"})
 })
 
-module.exports = router
+export default router

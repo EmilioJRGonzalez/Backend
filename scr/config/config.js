@@ -1,4 +1,5 @@
-const { Command } = require ('commander')
+import { Command } from 'commander'
+import dotenv from 'dotenv'
 
 const program = new Command()
 
@@ -9,12 +10,11 @@ console.log("Mode Option: ", program.opts().mode)
 
 const environment = program.opts().mode;
 
-require('dotenv').config({
+dotenv.config({
     path: '.env'
 });
 
-module.exports = 
-{
+export default {
     PORT: process.env.PORT,
     MONGO_URL: process.env.MONGO_URL,
     SECRET_KEY: process.env.SECRET_KEY,

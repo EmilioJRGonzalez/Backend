@@ -1,6 +1,6 @@
-const Carts = require('../models/db/cart.model')
+import Carts from '../models/db/cart.model.js'
 
-class CartService {
+export default class CartService {
     constructor(){
     }
 
@@ -58,6 +58,3 @@ class CartService {
     }
   
 }
-
-module.exports = CartService
-

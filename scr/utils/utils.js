@@ -1,5 +1,5 @@
-const CONFIG = require('../config/config');
-const jwt = require('jsonwebtoken')
+import CONFIG from '../config/config.js'
+import jwt from 'jsonwebtoken'
 
 const generateToken=(usuario, expiresIn = '24h')=> {
     const token = jwt.sign(usuario, CONFIG.SECRET_KEY, { expiresIn })
@@ -15,7 +15,4 @@ const authToken = (token) => {
     }
 }
 
-module.exports = {
-    generateToken, 
-    authToken
-}
+export { generateToken, authToken }

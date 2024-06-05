@@ -1,4 +1,4 @@
-const Tickets = require('../models/db/ticket.model')
+import Tickets from '../models/db/ticket.model.js'
 
 class TicketService {
     constructor(){
@@ -14,4 +14,4 @@ class TicketService {
 
 }
 
-module.exports = TicketService
+export default TicketService

@@ -1,4 +1,4 @@
-module.exports = `
+const plantillaMail = `
 <body>
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2>Confirmación de Compra</h2>
@@ -26,3 +26,5 @@ module.exports = `
     </div>
 </body>
 `
+
+export default plantillaMail

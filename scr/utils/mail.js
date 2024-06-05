@@ -1,5 +1,5 @@
-const CONFIG = require('../config/config')
-const nodemailer = require('nodemailer')
+import CONFIG from '../config/config.js'
+import nodemailer from 'nodemailer'
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -10,4 +10,4 @@ const transporter = nodemailer.createTransport({
     },
 })
 
-module.exports = transporter
+export default transporter

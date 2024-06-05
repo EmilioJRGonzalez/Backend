@@ -1,6 +1,6 @@
-const Products = require('../models/db/product.model')
+import Products from '../models/db/product.model.js'
 
-class ProductService {
+export default class ProductService {
     constructor(){
     }
 
@@ -45,5 +45,3 @@ class ProductService {
 
     }
 }
-
-module.exports = ProductService

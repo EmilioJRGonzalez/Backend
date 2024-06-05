@@ -1,4 +1,4 @@
-const { faker } = require('@faker-js/faker/locale/es');
+import { faker } from '@faker-js/faker/locale/es'
 
 const generateProducts = () => {
     let max = 100
@@ -28,6 +28,4 @@ const getProduct = () => {
     }
 };
 
-module.exports = {
-    generateProducts
-}
+export { generateProducts }

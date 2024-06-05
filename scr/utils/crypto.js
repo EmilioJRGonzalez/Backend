@@ -1,9 +1,5 @@
-const crypto = require('crypto')
+import crypto from 'crypto'
 
-const generateRandomValue = (length) => {
-    return crypto.randomBytes(length).toString('hex');
-}
-
-module.exports = {
-    generateRandomValue
+export const generateRandomValue = (length) => {
+    return crypto.randomBytes(length).toString('hex')
 }

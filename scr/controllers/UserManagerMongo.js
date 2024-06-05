@@ -1,4 +1,4 @@
-const UserService = require('../services/UserService')
+import UserService from '../services/UserService.js'
 let user = new UserService
 
 class UserManager {
@@ -48,4 +48,4 @@ class UserManager {
 
 }
 
-module.exports = UserManager
+export default UserManager

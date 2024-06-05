@@ -1,7 +1,8 @@
-const TicketService = require('../services/TicketService')
-let ticket = new TicketService
+import TicketService from '../services/TicketService.js'
 
-class TicketManager {
+const ticket = new TicketService()
+
+export default class TicketManager {
     constructor(){
     }
 
@@ -17,5 +18,3 @@ class TicketManager {
     }
 
 }
-
-module.exports = TicketManager

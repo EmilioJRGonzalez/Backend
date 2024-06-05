@@ -1,13 +1,11 @@
-const express = require('express')
-const authII = require('../middleware/auth')
+import express from 'express'
+import authII from '../middleware/auth.js'
 
-const {Router} = express
-
-const router = new Router()
+const router = express.Router()
 
 router.get('/', authII, (req, res)=>{
     console.log("inside chat")
     res.render('chat', {})
 })
 
-module.exports = router
+export default router

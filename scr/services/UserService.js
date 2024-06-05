@@ -1,6 +1,6 @@
-const Users = require('../models/db/user.model')
+import Users from '../models/db/user.model.js'
 
-class UserService {
+export default class UserService {
     constructor(){
     }
 
@@ -60,5 +60,3 @@ class UserService {
     }
 
 }
-
-module.exports = UserService

@@ -4,4 +4,4 @@ const EErrors = {
     DATABASE_ERROR: 3
 }
 
-module.exports = EErrors;
+export default EErrors

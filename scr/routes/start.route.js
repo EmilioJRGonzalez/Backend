@@ -1,10 +1,9 @@
-const express = require('express')
+import express from 'express'
 
-const {Router} = express
-const router = new Router()
+const router = express.Router()
 
 router.get('/', (req, res) => {
     res.redirect('/view/login-view')
 })
 
-module.exports = router
+export default router

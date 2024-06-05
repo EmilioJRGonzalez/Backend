@@ -1,8 +1,9 @@
-const ChatService = require('../services/ChatService')
-let chat = new ChatService
+import ChatService from '../services/ChatService.js'
 
-class ChatManager {
-    constructor(){
+const chat = new ChatService()
+
+export default class ChatManager {
+    constructor() {
     }
 
     async AddMessage(msj){
@@ -15,6 +16,3 @@ class ChatManager {
         }
     }
 }
-
-module.exports = ChatManager
-

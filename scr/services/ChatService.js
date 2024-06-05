@@ -1,6 +1,6 @@
-const Chats = require('../models/db/chat.model')
+import Chats from '../models/db/chat.model.js'
 
-class ChatService {
+export default class ChatService {
     constructor(){
     }
 
@@ -12,6 +12,4 @@ class ChatService {
         }
     }
 }
-
-module.exports = ChatService
 

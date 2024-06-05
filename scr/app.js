@@ -1,21 +1,26 @@
-const CONFIG = require('./config/config')
-const express = require('express')
-const session = require('express-session')
-const MongoStore = require('connect-mongo')
-const handlebars = require('express-handlebars')
-const ProductManagerMongo = require('./controllers/ProductManagerMongo')
-const ChatManagerMongo = require('./controllers/ChatManagerMongo')
-const initializePassport = require('./passport/passport')
-const initializePassportGithub = require('./passport/passport.github')
-const passport = require('passport')
-const http = require('http')
-const {Server} = require('socket.io')
-const Database = require('./models/db/db')
+import CONFIG from './config/config.js'
+import express from 'express'
+import session from 'express-session'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+import MongoStore from 'connect-mongo'
+import handlebars from 'express-handlebars'
+import ProductManagerMongo from './controllers/ProductManagerMongo.js'
+import ChatManagerMongo from './controllers/ChatManagerMongo.js'
+import initializePassport from './passport/passport.js'
+import initializePassportGithub from './passport/passport.github.js'
+import passport from 'passport'
+import { createServer } from 'http'; // Importa createServer desde http
+import { Server } from 'socket.io'
+import Database from './models/db/db.js'
 const PORT = CONFIG.PORT
-const compression = require('express-compression')
-const { addLogger } = require('./config/logger.js')
-const swaggerUi = require("swagger-ui-express")
-const { swaggerSpecs } = require('./utils/swaggerSpecs.js')
+import compression from 'express-compression'
+import { addLogger } from './config/logger.js'
+import swaggerUi from 'swagger-ui-express'
+import { swaggerSpecs } from './utils/swaggerSpecs.js'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const app = express()
 app.use(session({
@@ -33,21 +38,21 @@ let msjs = []
 let prod = new ProductManagerMongo
 let chat = new ChatManagerMongo
 
-const routerProduct = require('./routes/products.route')
-const routerCart = require('./routes/carts.route')
-const routerHome = require('./routes/home.router')
-const routerRealtime = require('./routes/realtime.route')
-const routerChat = require('./routes/chat.route')
-const routerProducts = require('./routes/productsPaginate.route')
-const routerCartList = require('./routes/cartList.route')
-const routerViews = require('./routes/views.route')
-const routerAuth = require('./routes/auth.route')
-const routerStart = require('./routes/start.route')
-const routerMocking = require('./routes/mocking.route')
-const routerLog = require('./routes/log.route')
+import routerProduct from './routes/products.route.js'
+import routerCart from './routes/carts.route.js'
+import routerHome from './routes/home.router.js'
+import routerRealtime from './routes/realtime.route.js'
+import routerChat from './routes/chat.route.js'
+import routerProducts from './routes/productsPaginate.route.js'
+import routerCartList from './routes/cartList.route.js'
+import routerViews from './routes/views.route.js'
+import routerAuth from './routes/auth.route.js'
+import routerStart from './routes/start.route.js'
+import routerMocking from './routes/mocking.route.js'
+import routerLog from './routes/log.route.js'
 
 //SERVER HTTP
-const server = http.createServer(app)
+const server = createServer(app)
 
 //PUBLIC
 app.use(express.static(__dirname+"/public"))

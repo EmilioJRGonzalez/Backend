@@ -1,11 +1,9 @@
-const express = require('express')
-const authII = require('../middleware/auth')
-const ProductManagerMongo = require('../controllers/ProductManagerMongo')
+import express from 'express'
+import authII from '../middleware/auth.js'
+import ProductManagerMongo from '../controllers/ProductManagerMongo.js'
 
-const {Router} = express
-const router = new Router()
-
-let prod = new ProductManagerMongo
+const router = express.Router()
+const prod = new ProductManagerMongo()
 
 router.get('/', authII, async (req, res) => {
     let limit = req.query.limit ? parseInt(req.query.limit) : 10;
@@ -32,4 +30,4 @@ router.get('/', authII, async (req, res) => {
     res.render('products', { products: aux.payload, totalPages: aux.totalPages, prevPage: aux.prevPage, nextPage: aux.nextPage, page: aux.page, pages: arrPages, session: req.session});
 })
 
-module.exports  = router
+export default router

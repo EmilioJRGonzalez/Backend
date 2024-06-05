@@ -1,12 +1,11 @@
-const express = require('express')
-const { generateProducts } = require('../utils/mock')
+import express from 'express'
+import { generateProducts } from '../utils/mock.js'
 
-const {Router} = express
-const router = new Router()
+const router = express.Router()
 
 router.get('/', async (req, res) => {
     let aux = generateProducts()
     res.send({data:aux, message: ''})
 })
 
-module.exports  = router
+export default router

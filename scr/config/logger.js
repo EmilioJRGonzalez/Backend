@@ -1,5 +1,5 @@
-const winston = require ('winston')
-const CONFIG = require('./config')
+import winston from 'winston'
+import CONFIG from './config.js'
 
 // Seteo de opciones
 const customLevelsOptions = {
@@ -74,8 +74,7 @@ const prodLogger = winston.createLogger({
 
 
 // creamos el middlware
-module.exports.addLogger = (req, res, next) => {
-
+export const addLogger = (req, res, next) => {
     if (CONFIG.ENVIRONMENT === "production") {
         req.logger = prodLogger;
         req.logger.info(`${req.method} en ${req.url} - at ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)

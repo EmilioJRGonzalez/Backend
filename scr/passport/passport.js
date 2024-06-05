@@ -1,10 +1,10 @@
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
-const userModel = require('../models/db/user.model')
-const {createHash, isValidPassword} = require('../utils/bcrypt')
-const CartManagerMongo = require('../controllers/CartManagerMongo')
+import passport from 'passport'
+import { Strategy as LocalStrategy } from 'passport-local'
+import userModel from '../models/db/user.model.js'
+import { createHash, isValidPassword } from '../utils/bcrypt.js'
+import CartManagerMongo from '../controllers/CartManagerMongo.js'
 
-let cart = new CartManagerMongo
+const cart = new CartManagerMongo()
 
 const initializePassport = () => {
 
@@ -44,4 +44,5 @@ const initializePassport = () => {
 
 }
 
-module.exports = initializePassport
+export default initializePassport
+

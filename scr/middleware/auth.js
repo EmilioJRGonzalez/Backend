@@ -28,4 +28,4 @@ const authII=(req, res, next)=> {
     next()
 }
 
-module.exports = authII
+export default authII

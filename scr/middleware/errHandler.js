@@ -1,6 +1,6 @@
-const EErrors = require ('./Err/ErrorsEnum')
+import EErrors from './Err/ErrorsEnum.js'
 
-module.exports = (error, req, res, next) => {
+export default (error, req, res, next) => {
     console.error("Error detectado entrando al Error Handler");
     console.log(error.cause);
     switch (error.code) {
@@ -10,4 +10,4 @@ module.exports = (error, req, res, next) => {
         default:
             res.status(500).send({ status: "error", error: "Unhandled error!" });
     }
-};
+}

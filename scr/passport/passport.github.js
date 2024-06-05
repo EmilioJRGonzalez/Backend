@@ -1,10 +1,10 @@
-const passport = require('passport')
-const github = require('passport-github2')
-const userModel = require('../models/db/user.model')
-const {createHash, isValidPassword} = require('../utils/bcrypt')
-const CartManagerMongo = require('../controllers/CartManagerMongo')
+import passport from 'passport'
+import github from 'passport-github2'
+import userModel from '../models/db/user.model.js'
+import { createHash, isValidPassword } from '../utils/bcrypt.js'
+import CartManagerMongo from '../controllers/CartManagerMongo.js'
 
-let cart = new CartManagerMongo
+const cart = new CartManagerMongo()
 
 const initPassport=()=>{
 
@@ -44,9 +44,10 @@ const initPassport=()=>{
 
 passport.serializeUser((usuario, done) => {
     done(null, usuario)
-})
+});
+
 passport.deserializeUser((usuario, done) => {
     done(null, usuario)
-})
+});
 
-module.exports = initPassport
+export default initPassport

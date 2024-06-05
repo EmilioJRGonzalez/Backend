@@ -1,9 +1,8 @@
-const express = require('express')
-const authII = require('../middleware/auth')
-const { authToken } = require('../utils/utils')
+import express from 'express'
+import authII from '../middleware/auth.js'
+import { authToken } from '../utils/utils.js'
 
-const {Router} = express
-const router = new Router()
+const router = express.Router()
 
 router.get('/login-view', (req, res) => {
     res.render('login')
@@ -45,4 +44,4 @@ router.get('/reset_password-view/:token', async (req, res) => {
     }
 });
 
-module.exports = router
+export default router

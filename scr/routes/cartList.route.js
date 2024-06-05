@@ -1,8 +1,7 @@
-const express = require('express')
-const CartManagerMongo = require('../controllers/CartManagerMongo')
+import express from 'express'
+import CartManagerMongo from '../controllers/CartManagerMongo.js'
 
-const {Router} = express
-const router = new Router()
+const router = express.Router()
 
 router.get('/:cid', async (req, res) => {
     let cart = new CartManagerMongo(req.logger)
@@ -13,4 +12,4 @@ router.get('/:cid', async (req, res) => {
     res.render('cart', { products: aux, cartID: cid });
 })
 
-module.exports  = router
+export default router;

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 
 const ChatSchema = new mongoose.Schema({
     messages: {
@@ -8,4 +8,4 @@ const ChatSchema = new mongoose.Schema({
 
 const Chat = mongoose.model('chats', ChatSchema)
 
-module.exports = Chat
+export default Chat

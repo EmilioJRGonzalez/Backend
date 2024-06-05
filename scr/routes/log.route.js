@@ -1,7 +1,6 @@
-const express = require('express')
+import { Router } from "express"
 
-const {Router} = express
-const router = new Router()
+const router = Router()
 
 router.get('/', (req, res) => {
     req.logger.debug("Prueba de log level debug")
@@ -14,4 +13,4 @@ router.get('/', (req, res) => {
 
 })
 
-module.exports = router
+export default router;

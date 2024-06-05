@@ -1,14 +1,13 @@
-const express = require('express')
-const authII = require('../middleware/auth')
-const ProductManager = require('../models/fileSystem/ProductManager')
-const ProductManagerMongo = require('../controllers/ProductManagerMongo')
+import express from 'express'
+import authII from '../middleware/auth.js'
+import ProductManager from '../models/fileSystem/ProductManager.js'
+import ProductManagerMongo from '../controllers/ProductManagerMongo.js'
 
-const {Router} = express
-
+const { Router } = express
 const router = new Router()
 
 //let prod = new ProductManager('./scr/models/fileSystem/data/productos.json')
-let prod = new ProductManagerMongo
+const prod = new ProductManagerMongo()
 
 router.get('/', authII, async (req, res)=> {
     let limit = 100
@@ -19,4 +18,4 @@ router.get('/', authII, async (req, res)=> {
     res.render('realTimeProducts', {products: aux.payload})
 })
 
-module.exports = router
+export default router

@@ -1,18 +1,16 @@
-const express = require('express')
-const authII = require('../middleware/auth')
-const CONFIG = require('../config/config')
-const { generateRandomValue } = require('../utils/crypto')
-const transporter = require('../utils/mail')
-const CartManagerMongo = require('../controllers/CartManagerMongo')
-const ProductManagerMongo = require('../controllers/ProductManagerMongo')
-const TicketManagerMongo = require('../controllers/TicketManagerMongo')
-const html = require('../utils/plantillaMail.js')
+import express from 'express'
+import authII from '../middleware/auth.js'
+import CONFIG from '../config/config.js'
+import { generateRandomValue } from '../utils/crypto.js'
+import transporter from '../utils/mail.js'
+import CartManagerMongo from '../controllers/CartManagerMongo.js'
+import ProductManagerMongo from '../controllers/ProductManagerMongo.js'
+import TicketManagerMongo from '../controllers/TicketManagerMongo.js'
+import html from '../utils/plantillaMail.js'
 
-const {Router} = express
-const router = new Router()
-
-let prod = new ProductManagerMongo
-let tik = new TicketManagerMongo
+const router = express.Router()
+const prod = new ProductManagerMongo()
+const tik = new TicketManagerMongo()
 
 router.get('/:cid', async (req, res) => {
     let cart = new CartManagerMongo(req.logger)
@@ -147,4 +145,4 @@ router.get('/:cid/purchase', async (req, res) => {
     }
 })
 
-module.exports  = router
+export default router

@@ -1,7 +1,7 @@
-const CartService = require('../services/CartService')
+import CartService from '../services/CartService.js'
 let cart = new CartService
 
-class CartManager {
+export default class CartManager {
     constructor(logger) {
         this.logger = logger
     }
@@ -155,6 +155,3 @@ class CartManager {
     }
   
 }
-
-module.exports = CartManager
-

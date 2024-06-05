@@ -1,5 +1,4 @@
-const path = require('path')
-const swaggerJsdoc = require('swagger-jsdoc')
+import swaggerJsdoc from 'swagger-jsdoc'
 
 const options = {
     definition: {
@@ -9,9 +8,10 @@ const options = {
             description: "A simple CRUD API application made with Express and documented with Swagger"
         }
     },
-    apis: [path.join(__dirname, '../docs/**/*.yaml')]
+    //apis: [path.join(__dirname, '../docs/**/*.yaml')]
+    apis: ['../docs/**/*.yaml']
 }
 
 const swaggerSpecs = swaggerJsdoc(options)
 
-module.exports = { swaggerSpecs }
+export { swaggerSpecs }
