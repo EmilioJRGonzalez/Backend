@@ -1,3 +1,6 @@
+import CONFIG from '../config/config.js'
+const PORT = CONFIG.PORT
+
 import CustomError from '../middleware/Err/CustomError.js'
 import EErrors from '../middleware/Err/ErrorsEnum.js'
 import { insertProductErrorInfo } from '../services/errors/produc-creation-error.message.js'
@@ -16,7 +19,7 @@ export default class ProductManager {
     async getProducts(limit, page, sort, filter){
         let resp
         let response
-        let URL = 'http://localhost:8080/api/product'
+        let URL = `http://localhost:${PORT}/api/product`
         try{
             resp = await product.getProductsPaginate(limit, page, sort, filter)
             let payload = resp.docs.map(item => item._doc)

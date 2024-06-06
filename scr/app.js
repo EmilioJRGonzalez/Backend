@@ -143,7 +143,7 @@ io.on('connection', (socket)=> {
 
     socket.on('product-add', async (data)=> {
         try{
-            await realizarLlamadaPOST(`http://localhost:8080/api/product/`, data);
+            await realizarLlamadaPOST(`http://localhost:${PORT}/api/product/`, data);
             let products = await getAllProducts()
             io.sockets.emit('products-update', products);
             } catch (error) {

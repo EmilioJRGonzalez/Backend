@@ -1,90 +1,84 @@
-import chai from 'chai'
-import supertest from 'supertest'
-import mongoose from 'mongoose'
+import { expect } from 'chai';
+import supertest from 'supertest';
+import mongoose from 'mongoose';
+import UserManagerMongo from '../scr/controllers/UserManagerMongo.js'
 
-
-const expect = chai.expect
 const requester = supertest('http://localhost:8080')
 
-mongoose.connect(`mongodb+srv://emiliojrg88:pBMHOMINd1WpdtGd@coder.q3bmoe2.mongodb.net/ecommerce`)
+mongoose.connect(`mongodb+srv://emiliojrg88:pBMHOMINd1WpdtGd@coder.q3bmoe2.mongodb.net/ecommerce_test`)
 
-  describe('Testing Pets App', () => {
+describe('Testing de auth', () => {
 
-    /*=============================================
-    =                   Section 02                =
-    =============================================*/
-    describe("Testing login and session with Cookies:", () => {
+    before(async function () {
+        if (mongoose.connection.collections.users) {
+            await mongoose.connection.collections.users.drop()
+        }
+        if (mongoose.connection.collections.carts) {
+            await mongoose.connection.collections.carts.drop()
+        }
+        if (mongoose.connection.collections.sessions) {
+            await mongoose.connection.collections.sessions.drop()
+        }
+    })
 
+    describe("Test de login y session:", () => {
 
         before(function () {
+            this.timeout(5000);
             this.mockUser = {
                 first_name: "Nombre Test",
                 last_name: "Apellido Test",
-                email: "correo_Test@gmail.com",
+                email: "correo_test@gmail.com",
                 password: "123456"
-              };
-        });
+            }
+            this.user = new UserManagerMongo()
+        })
 
-
-
-        // Test 01
         // Test 01
         it("Registro Usuario: Debe poder registrar correctamente un usuario", async function () {
             // Given:
-            console.log(this.mockUser);
     
             // Then:
-            const aux = await requester.post('/auth/register').send(this.mockUser);
-            console.log(aux);
+            const resp = await requester.post('/auth/register').send(this.mockUser);
+            //console.log(resp)
     
-            // Assert that:
-            expect(aux.status).to.equal(200); // Revisa que la propiedad `status` sea 200
-        });
-
-
+            // Assert:
+            expect(resp.status).to.equal(302)
+            expect(resp.headers.location).to.equal('/view/login-view')
+        })
 
         // Test 02
         it("Test Login Usuario: Debe poder hacer login correctamente con el usuario registrado previamente.", async function () {
             //Given:
-            const mockLogin = {
-                email: this.mockUser.email,
-                password: this.mockUser.password,
-            }
 
             //Then: 
-            const result = await requester.post('/api/sessions/login').send(mockLogin)
-            // console.log(result);
+            const resp = await requester.post('/auth/login').send(this.mockUser)
 
-            const cookieResult = result.header['set-cookie'][0]
-            const cookieData = cookieResult.split('=')
+            //let userFound = await this.user.userExist(this.mockUser.email)
+
+            const header = resp.header['set-cookie'][0]
+            const cookieData = header.split('=')
             this.cookie = {
                 name: cookieData[0],
                 value: cookieData[1]
             }
 
-            //Assert that:
-            expect(this.cookie.name).is.ok.and.eql('coderCookie')
-            expect(this.cookie.value).is.ok
-
-        });
-
-        // Test 03
-        it("Test Ruta Protegida: Debe enviar la cookie que contiene el usuario y destructurarla correctamente.", async function () {
-
-            // given
-
-
-            // Then
-            const { _body } = await requester.get('/api/sessions/current').set('Cookie', [`${this.cookie.name}=${this.cookie.value}`])
-            // console.log(_body);
-
-
-            // Assert
-            expect(_body.payload.email).to.be.ok.and.eql(this.mockUser.email);
-
+            // Assert:
+            expect(resp.status).to.equal(302)
+            expect(resp.headers.location).to.equal('/products')
         })
 
+        
+        // Test 03
+        it("Test Ruta Protegida: Debe enviar la cookie que contiene el usuario y destructurarla correctamente.", async function () {
+            // given
 
-    });
+            // Then
+            const resp = await requester.get('/view/profile-view').set('Cookie', [`${this.cookie.name}=${this.cookie.value}`])
+
+            expect(resp.status).to.equal(200)
+            expect(resp.res.text).to.match(new RegExp(this.mockUser.email));
+        })
+    })
 
 })
