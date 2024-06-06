@@ -35,12 +35,11 @@ describe('Testing de auth', () => {
         })
 
         // Test 01
-        it("Registro Usuario: Debe poder registrar correctamente un usuario", async function () {
+        it("Registro de usuario mock", async function () {
             // Given:
     
             // Then:
             const resp = await requester.post('/auth/register').send(this.mockUser);
-            //console.log(resp)
     
             // Assert:
             expect(resp.status).to.equal(302)
@@ -48,13 +47,11 @@ describe('Testing de auth', () => {
         })
 
         // Test 02
-        it("Test Login Usuario: Debe poder hacer login correctamente con el usuario registrado previamente.", async function () {
+        it("Login con el usuario registrado previamente.", async function () {
             //Given:
 
             //Then: 
             const resp = await requester.post('/auth/login').send(this.mockUser)
-
-            //let userFound = await this.user.userExist(this.mockUser.email)
 
             const header = resp.header['set-cookie'][0]
             const cookieData = header.split('=')
@@ -70,7 +67,7 @@ describe('Testing de auth', () => {
 
         
         // Test 03
-        it("Test Ruta Protegida: Debe enviar la cookie que contiene el usuario y destructurarla correctamente.", async function () {
+        it("Acceso a ruta Protegida seteando la cookie con los datos recibidos en el login", async function () {
             // given
 
             // Then
@@ -80,5 +77,8 @@ describe('Testing de auth', () => {
             expect(resp.res.text).to.match(new RegExp(this.mockUser.email));
         })
     })
-
+    after(async function() {
+        // Cierra la conexión a la base de datos
+        await mongoose.connection.close();
+    });
 })

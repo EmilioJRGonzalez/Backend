@@ -48,6 +48,7 @@ export default class ProductManager {
 
     async addProduct(body){
         let resp
+        console.log(body)
 
         try{
             if (!body.title || !body.description || !body.price || !body.thumbnail || !body.code || !['Categoria 1', 'Categoria 2', 'Categoria 3'].includes(body.category)) {

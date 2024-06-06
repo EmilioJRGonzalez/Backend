@@ -54,9 +54,13 @@ router.delete('/:cid/product/:pid', async (req, res) => {
     let cart = new CartManagerMongo(req.logger)
     let cid = req.params.cid
     let pid = req.params.pid
+    let s = 200
 
     let aux = await cart.deleteProductFromCart(cid, pid)
-    res.send({data:[], message: aux})
+    if (aux.toUpperCase().includes('ERROR')){
+        s = 400
+    }
+    res.status(s).send({data:[], message: aux})
 })
 
 router.put('/:cid', async (req, res) => {
@@ -81,9 +85,13 @@ router.put('/:cid/products/:pid', async (req, res) => {
 router.delete('/:cid', async (req, res) => {
     let cart = new CartManagerMongo(req.logger)
     let cid = req.params.cid
+    let s = 200
 
     let aux = await cart.clearCart(cid)
-    res.send({data:[], message: aux})
+    if (aux.toUpperCase().includes('ERROR')){
+        s = 400
+    }
+    res.status(s).send({data:[], message: aux})
 })
 
 router.get('/:cid/purchase', async (req, res) => {

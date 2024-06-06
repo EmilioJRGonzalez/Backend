@@ -13,7 +13,7 @@ const generateProducts = () => {
 
 const getProduct = () => {
 
-    arrCategory = ['Categoria 1', 'Categoria 2', 'Categoria 3']
+    const arrCategory = ['Categoria 1', 'Categoria 2', 'Categoria 3']
 
     return {
         id: faker.database.mongodbObjectId(),
@@ -22,10 +22,11 @@ const getProduct = () => {
         price: faker.commerce.price(),
         thumbnail: faker.image.url(),
         code: faker.string.alphanumeric(6),
-        stock: faker.number.int({min: 0, max: 20}),        
+        stock: faker.number.int({min: 0, max: 50}),        
         status: true,
-        category: faker.helpers.arrayElement(arrCategory)
+        category: faker.helpers.arrayElement(arrCategory),
+        owner: 'admin'
     }
 };
 
-export { generateProducts }
+export { generateProducts, getProduct }

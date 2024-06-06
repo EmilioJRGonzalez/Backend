@@ -36,12 +36,13 @@ router.get('/:pid', async (req, res) => {
 router.post('/', async (req, res) => {
     let prod = new ProductManagerMongo(req.logger)
     let body = req.body
+    let s = 200
 
     let aux = await prod.addProduct(body)
-    if (aux.length >0){
-        msg = aux;
+    if (aux.toUpperCase().includes('ERROR')){
+        s = 400
     }
-    res.send({data:[], message: aux})
+    res.status(s).send({data:[], message: aux})
 })
 
 router.delete('/:id', async (req, res) => {
@@ -49,11 +50,15 @@ router.delete('/:id', async (req, res) => {
     req.logger.debug(req.params)
     let id = req.params.id
     let user = req.body.user
+    let s = 200
 
     let aux = await prod.deleteProduct(id, user)
     console.log(aux)
+    if (aux.toUpperCase().includes('ERROR')){
+        s = 400
+    }
 
-    res.send({data:[], message: aux})
+    res.status(s).send({data:[], message: aux})
 })
 
 router.put('/:id', async (req, res) => {

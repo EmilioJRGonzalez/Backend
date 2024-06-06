@@ -9,7 +9,7 @@ export default class CartManager {
     async createCart(){
         try{
             let resp = await cart.createEmptyCart()
-            console.log(resp)
+            //console.log(resp)
             //this.logger.debug(`${JSON.stringify(resp)}`)
             return resp._id
     
@@ -85,7 +85,7 @@ export default class CartManager {
 
                 let prodToUpdate
                 if (index === -1) {
-                    aux = `pid ${pid} NO encontrado`
+                    aux = `ERROR: pid ${pid} NO encontrado`
                 }else{
                     prodToUpdate = [...respC.products]
                     const resp = await cart.updateOneCart(cid, prodToUpdate)
@@ -145,7 +145,7 @@ export default class CartManager {
             if (result.modifiedCount > 0) {
                 aux = `Se borraron todos los productos del carrito ${cid}`
             } else {
-                aux = `No se actualizó el carrito ${cid}`
+                aux = `ERROR: No se actualizó el carrito ${cid}`
             }
         } catch (error) {
             aux = error
