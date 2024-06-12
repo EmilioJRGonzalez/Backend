@@ -181,15 +181,38 @@ router.post('/premium/:uid', async (req, res) => {
     let role = req.body.role
     let aux
 
-    const validRoles = ['user', 'premium'];
+    const validRoles = ['user', 'premium']
+    const reqDocuments = ['Identificación', 'Comprobante de domicilio', 'Comprobante de estado de cuenta']
 
     if (validRoles.includes(role)) {
-        aux = await user.updateUserRole(uid, role)
+        if (role === 'premium') {
+            try {
+                aux = await user.userFindById(uid)
+                
+                if (!aux) {
+                    return res.status(404).send({ message: 'Usuario no encontrado' })
+                }
+
+                const userDocuments = aux.documents.map(doc => doc.name)
+                const hasAllRequiredDocuments = reqDocuments.every(doc => userDocuments.includes(doc))
+
+                if (!hasAllRequiredDocuments) {
+                    return res.status(400).send({ message: 'El usuario no ha terminado de procesar su documentación' })
+                }
+
+                aux = await user.updateUserRole(uid, role)
+                return res.send({ data: aux, message: 'Rol actualizado correctamente' })
+            } catch (error) {
+                return res.status(500).send({ message: 'Error del servidor', error });
+            }
+        }else{
+            aux = await user.updateUserRole(uid, role)
+            return res.send({ data: aux, message: 'Rol actualizado correctamente' })
+        }
     }else{
         return res.status(400).send({data: aux, message: `No se puede modificar el Rol a ${role}`})
     }
 
-    res.send({data: aux, message: "Rol actualizado correctamente"})
 })
 
 export default router

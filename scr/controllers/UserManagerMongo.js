@@ -16,6 +16,16 @@ class UserManager {
         }
     }
 
+    async userFindById(id){
+        try{
+            let resp = await user.findUserById(id)
+            return resp;
+        }catch(err){
+            console.debug(err)
+            return err
+        }
+    }
+
     async userExist(email){
         try{
             let resp = await user.findOneUser(email)
