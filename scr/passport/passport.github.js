@@ -33,9 +33,10 @@ const initPassport=()=>{
                         }
                     )
                 }
+                await userModel.findByIdAndUpdate( usuario._id, { last_connection: new Date() })
                 return done(null, usuario)
             }catch(err){
-                return done (error)
+                return done (err)
             }
         }
     ))   

@@ -46,6 +46,16 @@ class UserManager {
         }
     }
 
+    async updateLastConnection(email){
+        try{
+            let resp = await user.updateConnection(email)
+            return resp;
+        }catch(err){
+            console.debug(err)
+            return err
+        }
+    }
+
 }
 
 export default UserManager

@@ -59,4 +59,12 @@ export default class UserService {
         }
     }
 
+    async updateConnection(email) {
+        try {
+            const aux = await Users.findOneAndUpdate({ email }, { last_connection: new Date() })
+        } catch (err) {
+            return err
+        }
+    }
+
 }

@@ -34,13 +34,16 @@ router.post('/login', async (req, res) => {
         delete userLogin.password
         //let token = generateToken(userLogin)
 
+        user.updateLastConnection(userLogin.email)
+
         res.redirect('/products')
         return
     }
     res.send("Usuario o contraseña incorrectos")
 })
 
-router.get('/logout', (req, res) => {
+router.get('/logout', async(req, res) => {
+    user.updateLastConnection(req.session.email)
     req.session.destroy(err => {
         if (err) res.send("Error en logout")
     })

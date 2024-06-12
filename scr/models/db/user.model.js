@@ -30,6 +30,20 @@ const UserSchema = new mongoose.Schema({
         require: true,
         enum: ['admin', 'user', 'premium'],
         default: 'user'
+    },
+    documents: [{
+        name: {
+            type: String,
+            required: true
+        },
+        reference: {
+            type: String,
+            required: true
+        }
+    }],
+    last_connection: {
+        type: Date,
+        default: Date.now
     }
 },
 { 
