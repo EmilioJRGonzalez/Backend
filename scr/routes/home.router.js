@@ -32,7 +32,7 @@ router.post("/updloadimage", uploader.single('file'), (req, res) => {
         console.error(image);
         res.status(400).send({ status: "Error", message: "Archivo invalido, verifique los datos ingresados." });
     } else {
-        res.send({ status: "Success", message: `Archivo guardado correctamente on el nombre ${basename(image.path)}` });
+        res.send({ status: "Success", message: `Archivo guardado correctamente con el nombre ${basename(image.path)}` });
     }
 })
 
