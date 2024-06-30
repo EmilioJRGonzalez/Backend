@@ -1,18 +1,20 @@
+import CONFIG from '../config/config.js'
 import passport from 'passport'
 import github from 'passport-github2'
 import userModel from '../models/db/user.model.js'
 import { createHash, isValidPassword } from '../utils/bcrypt.js'
 import CartManagerMongo from '../controllers/CartManagerMongo.js'
 
+const PORT = CONFIG.PORT
 const cart = new CartManagerMongo()
 
 const initPassport=()=>{
-
+    console.log("aaaaa")
     passport.use("github", new github.Strategy(
         {
             clientID:"Iv1.92464d2b60fc2196",
             clientSecret:"b0605d48a1262f69db180c43ecc72d56e2bc0da2",
-            callbackURL:"http://localhost:8080/auth/callbackGithub"
+            callbackURL:`http://localhost:${PORT}/api/users/callbackGithub`
         },
         async(accessToken, refreshToken, profile, done) => {
             try{

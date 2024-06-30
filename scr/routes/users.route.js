@@ -12,7 +12,7 @@ const router = new Router()
 
 const user = new UserManagerMongo()
 
-router.post('/register', passport.authenticate('register', {failureRedirect: '/auth/failedRegister'}) , async (req, res) => {
+router.post('/register', passport.authenticate('register', {failureRedirect: '/api/users/failedRegister'}) , async (req, res) => {
     res.redirect('/view/login-view')
 })
 

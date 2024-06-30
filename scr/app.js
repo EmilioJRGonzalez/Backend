@@ -46,7 +46,7 @@ import routerChat from './routes/chat.route.js'
 import routerProducts from './routes/productsPaginate.route.js'
 import routerCartList from './routes/cartList.route.js'
 import routerViews from './routes/views.route.js'
-import routerAuth from './routes/auth.route.js'
+import routerUsers from './routes/users.route.js'
 import routerStart from './routes/start.route.js'
 import routerMocking from './routes/mocking.route.js'
 import routerLog from './routes/log.route.js'
@@ -93,7 +93,7 @@ app.use('/chat', routerChat)
 app.use('/products', routerProducts)
 app.use('/cart', routerCartList)
 app.use('/view', routerViews)
-app.use('/auth', routerAuth)
+app.use('/api/users', routerUsers)
 app.use('/', routerStart)
 app.use('/mockingproducts', routerMocking)
 app.use('/loggertest', routerLog)

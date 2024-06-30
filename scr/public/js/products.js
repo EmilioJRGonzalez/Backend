@@ -56,7 +56,7 @@ function logout() {
     };
   
     // Realiza una solicitud GET al endpoint de logout
-    fetch('http://localhost:8080/auth/logout')
+    fetch('http://localhost:8080/api/users/logout')
     .then(response => {
         if (response.ok) {
             alert('Sesión cerrada exitosamente');
