@@ -5,8 +5,8 @@
   "main": "scr/app.js",
   "type": "module",
   "scripts": {
-    "test": "mocha test/auth.test.js",
-    "start": "nodemon /scr/app.js"
+    "test": "mocha test/products.test.js",
+    "start": "node /scr/app.js"
   },
   "repository": {
     "type": "git",
