@@ -1,6 +1,6 @@
 async function purchase(cartId) {
     try {
-        const response = await fetch(`http://localhost:8080/api/cart/${cartId}/purchase`);
+        const response = await fetch(`http://${API_HOST}:${API_PORT}/api/cart/${cartId}/purchase`);
         const data = await response.json();
 
         if (!response.ok) {

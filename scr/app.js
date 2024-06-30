@@ -14,6 +14,7 @@ import { createServer } from 'http'; // Importa createServer desde http
 import { Server } from 'socket.io'
 import Database from './models/db/db.js'
 const PORT = CONFIG.PORT
+const HOST = CONFIG.HOST
 import compression from 'express-compression'
 import { addLogger } from './config/logger.js'
 import swaggerUi from 'swagger-ui-express'
@@ -72,8 +73,15 @@ const handlebarsHelpers = {
 app.engine('handlebars', handlebars.engine({
     helpers: handlebarsHelpers // Registra los helpers
 }));
-app.set('view engine', 'handlebars');
+app.set('view engine', 'handlebars')
 app.set('views', __dirname+'/views')
+
+//Middleware para pasar variables de entorno a todas las vistas
+app.use((req, res, next) => {
+    res.locals.apiHost = HOST;
+    res.locals.apiPort = PORT;
+    next();
+  });
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
@@ -143,7 +151,7 @@ io.on('connection', (socket)=> {
 
     socket.on('product-add', async (data)=> {
         try{
-            await realizarLlamadaPOST(`http://localhost:${PORT}/api/product/`, data);
+            await realizarLlamadaPOST(`http://${HOST}:${PORT}/api/product/`, data);
             let products = await getAllProducts()
             io.sockets.emit('products-update', products);
             } catch (error) {
@@ -168,6 +176,6 @@ io.on('connection', (socket)=> {
 })
   
 server.listen(PORT, ()=> {
-    console.log(`Servidor corriendo en puerto ${PORT}`)
+    console.log(`Servidor corriendo en ${HOST}, puerto ${PORT}`)
     Database.connect()
 })
