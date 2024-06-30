@@ -9,7 +9,6 @@ const PORT = CONFIG.PORT
 const cart = new CartManagerMongo()
 
 const initPassport=()=>{
-    console.log("aaaaa")
     passport.use("github", new github.Strategy(
         {
             clientID:"Iv1.92464d2b60fc2196",

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "mocha test/products.test.js",
-    "start": "node /scr/app.js"
+    "start": "node scr/app.js"
   },
   "repository": {
     "type": "git",
