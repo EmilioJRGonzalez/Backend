@@ -32,7 +32,7 @@ router.get('/reset_password-view/:token', async (req, res) => {
 
     } catch (error) {
         console.log("Err:", error)
-        res.send(`
+        res.status(400).send(`
             <html>
                 <body>
                     <h1>Token inválido o expirado</h1>
