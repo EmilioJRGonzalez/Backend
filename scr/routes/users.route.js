@@ -88,7 +88,7 @@ router.post('/forgot-password', async (req, res) => {
     }
 
     let token = generateToken({email: userLogin.email}, '1h')
-    let resetLink = `http://localhost:${CONFIG.PORT}/view/reset_password-view/${token}`
+    let resetLink = `${CONFIG.PROTOCOL}://${CONFIG.HOST}:${CONFIG.PORT}/view/reset_password-view/${token}`
 
     console.log("resetLink", resetLink )
 

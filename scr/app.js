@@ -77,14 +77,6 @@ app.engine('handlebars', handlebars.engine({
 app.set('view engine', 'handlebars')
 app.set('views', __dirname+'/views')
 
-//Middleware para pasar variables de entorno a todas las vistas
-app.use((req, res, next) => {
-    res.locals.protocol = PROTOCOL;
-    res.locals.apiHost = HOST;
-    res.locals.apiPort = PORT;
-    next();
-});
-
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(compression())
