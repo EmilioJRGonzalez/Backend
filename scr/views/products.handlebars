@@ -10,7 +10,7 @@
                 <p class="mb-1">Email: {{session.email}}</p>
                 <p>Tipo de usuario: {{session.rol}}</p>
 
-                <a href="{{protocol}}://{{apiHost}}:{{apiPort}}/cart/{{session.cart}}" id="cartButton" data-cart-id="{{session.cart}}" class="btn btn-success mr-2">Carrito de Compras</a>
+                <a href="/cart/{{session.cart}}" id="cartButton" data-cart-id="{{session.cart}}" class="btn btn-success mr-2">Carrito de Compras</a>
                 <button id="logout" onclick="logout()" class="btn btn-primary">Cerrar Sesión</button>
             </div>
         </div>        
