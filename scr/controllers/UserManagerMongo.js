@@ -66,6 +66,26 @@ class UserManager {
         }
     }
 
+    async getUsers(){
+        try{
+            let resp = await user.findAllUsers()
+            return resp;
+        }catch(err){
+            console.debug(err)
+            return err
+        }
+    }
+
+    async deleteInactiveUsers(){
+        try{
+            let resp = await user.deleteInactiveUsers()
+            return resp;
+        }catch(err){
+            console.debug(err)
+            return err
+        }
+    }
+
 }
 
 export default UserManager

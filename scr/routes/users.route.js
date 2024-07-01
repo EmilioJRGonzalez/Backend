@@ -6,6 +6,7 @@ import { generateToken, authToken } from '../utils/utils.js'
 import authII from '../middleware/auth.js'
 import transporter from '../utils/mail.js'
 import CONFIG from '../config/config.js'
+import html from '../utils/plantillaMailInactividad.js'
 
 const { Router } = express
 const router = new Router()
@@ -218,6 +219,41 @@ router.post('/premium/:uid', async (req, res) => {
     }else{
         return res.status(400).send({data: aux, message: `No se puede modificar el Rol a ${role}`})
     }
+
+})
+
+router.get('/', async (req, res)=>{
+
+    let aux = await user.getUsers()
+    return res.send({ data: aux})
+
+})
+
+router.delete('/', async (req, res)=>{
+
+    let aux = await user.deleteInactiveUsers()
+
+    let correoHTML = html
+
+    if (aux.usersDeleted && aux.usersDeleted.length > 0) {
+        let destinatarios = aux.usersDeleted.map(user => user.email).join(',');
+
+        console.log("DEST:", destinatarios)
+
+        let mensaje = await transporter.sendMail({
+            from: `Ecommerce test ${CONFIG.MAIL_USER}`,
+            to: destinatarios,
+            subject:'ECOMMERCE CODERHOUSE: Cuenta Eliminada por Inactividad',
+            text:'Cuenta Eliminada por Inactividad!',
+            html: correoHTML
+        })
+        if(!!mensaje.messageId){
+            console.log('email enviado', mensaje.messageId)
+        }
+
+    }
+
+    return res.send({ data: aux})
 
 })
 

@@ -67,4 +67,38 @@ export default class UserService {
         }
     }
 
+    async findAllUsers(){
+        try{
+            return await Users.find().select('first_name email role')
+        }catch(err){
+            return err
+        }
+
+    }
+
+    async deleteInactiveUsers() {
+        try {
+            const limitDate = new Date()
+            limitDate.setDate(limitDate.getDate() - 2) //2 dias
+            //limitDate.setMinutes(limitDate.getMinutes() - 30) // 30 minutos
+
+            const usersToDelete = await Users.find({
+                last_connection: { $lt: limitDate },
+                role: { $ne: "admin" }
+            }).select('email')
+
+            let result = await Users.deleteMany({
+                last_connection: { $lt: limitDate },
+                role: { $ne: "admin" }
+            })
+
+            return {
+                result,
+                usersDeleted: usersToDelete
+            };
+        } catch (err) {
+            throw err
+        }
+    }
+
 }
