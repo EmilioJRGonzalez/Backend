@@ -88,7 +88,13 @@ router.post('/forgot-password', async (req, res) => {
     }
 
     let token = generateToken({email: userLogin.email}, '1h')
-    let resetLink = `${CONFIG.PROTOCOL}://${CONFIG.HOST}:${CONFIG.PORT}/view/reset_password-view/${token}`
+    let resetLink = ""
+
+    if (CONFIG.HOST.includes("railway.app")) {
+        resetLink = `${CONFIG.PROTOCOL}://${CONFIG.HOST}/view/reset_password-view/${token}`
+    }else{
+        resetLink = `${CONFIG.PROTOCOL}://${CONFIG.HOST}:${CONFIG.PORT}/view/reset_password-view/${token}`
+    }
 
     console.log("resetLink", resetLink )
 
