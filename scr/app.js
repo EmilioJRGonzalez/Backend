@@ -15,6 +15,7 @@ import { Server } from 'socket.io'
 import Database from './models/db/db.js'
 const PORT = CONFIG.PORT
 const HOST = CONFIG.HOST
+const PROTOCOL = CONFIG.PROTOCOL
 import compression from 'express-compression'
 import { addLogger } from './config/logger.js'
 import swaggerUi from 'swagger-ui-express'
@@ -78,6 +79,7 @@ app.set('views', __dirname+'/views')
 
 //Middleware para pasar variables de entorno a todas las vistas
 app.use((req, res, next) => {
+    res.locals.protocol = PROTOCOL;
     res.locals.apiHost = HOST;
     res.locals.apiPort = PORT;
     next();
@@ -151,7 +153,7 @@ io.on('connection', (socket)=> {
 
     socket.on('product-add', async (data)=> {
         try{
-            await realizarLlamadaPOST(`http://${HOST}:${PORT}/api/product/`, data);
+            await realizarLlamadaPOST(`${PROTOCOL}://${HOST}:${PORT}/api/product/`, data);
             let products = await getAllProducts()
             io.sockets.emit('products-update', products);
             } catch (error) {
@@ -176,6 +178,6 @@ io.on('connection', (socket)=> {
 })
   
 server.listen(PORT, ()=> {
-    console.log(`Servidor corriendo en ${HOST}, puerto ${PORT}`)
+    console.log(`Servidor corriendo en ${PROTOCOL}://${HOST}, puerto ${PORT}`)
     Database.connect()
 })
