@@ -30,7 +30,7 @@ function addToCart(productId) {
   };
 
   // Realiza una solicitud POST al endpoint del carrito
-  fetch(`${PROTOCOL}://${API_HOST}:${API_PORT}/api/cart/${cartId}/product/${productId}`, requestData)
+  fetch(`/api/cart/${cartId}/product/${productId}`, requestData)
   .then(async response => {
       const data = await response.json();
       if (response.ok) {
@@ -56,7 +56,7 @@ function logout() {
     };
   
     // Realiza una solicitud GET al endpoint de logout
-    fetch(`${PROTOCOL}://${API_HOST}:${API_PORT}/api/users/logout`)
+    fetch(`/api/users/logout`)
     .then(response => {
         if (response.ok) {
             alert('Sesión cerrada exitosamente');
