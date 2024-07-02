@@ -222,6 +222,16 @@ router.get('/', async (req, res)=>{
 
 })
 
+router.get('/:uid', async (req, res)=>{
+    let uid = req.params.uid
+
+    let aux = await user.userFindById(uid)
+    //aux = JSON.stringify(aux)
+    console.log(aux)
+    return res.send({ data: aux})
+
+})
+
 router.delete('/', async (req, res)=>{
 
     let aux = await user.deleteInactiveUsers()

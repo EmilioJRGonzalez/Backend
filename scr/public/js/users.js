@@ -4,11 +4,28 @@ async function selectUser() {
         document.getElementById('userForm').style.display = 'block';
         document.getElementById('userId').value = userId;
 
-        // Obtener los detalles del usuario seleccionado (simulación)
-        /* const selectedUser = users.find(user => user._id === userId);
-        document.getElementById('role').value = selectedUser.role; */
+        const selectedUser = await this.findUser(userId);
+
+        document.getElementById('role').value = selectedUser.role;
+        document.getElementById('userEmail').textContent  = `Email: ${selectedUser.email}`;
+        document.getElementById('userName').textContent  = `Nombre: ${selectedUser.first_name}`;
     } else {
         document.getElementById('userForm').style.display = 'none';
+    }
+}
+
+async function findUser(userId) {
+    try {
+        const response = await fetch(`/api/users/${userId}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error('Error al buscar los datos del usuario');
+        }
+        return data.data;
+    } catch (error) {
+        console.error(error);
+        alert('Hubo un error al intentar realizar la compra.');
     }
 }
 
