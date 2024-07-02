@@ -1,0 +1,40 @@
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center">Administrar Usuarios</h1>
+                <!-- Combo para seleccionar un usuario -->
+                <div class="form-group">
+                    <select id="userSelect" class="form-control" onchange="selectUser()">
+                        <option value="">Selecciona un usuario</option>
+                        {{#each users}}
+                            <option value="{{_id}}">{{first_name}} {{last_name}} ({{email}})</option>
+                        {{/each}}
+                    </select>
+                </div>
+
+                <!-- Formulario para actualizar rol y eliminar usuario -->
+                <div id="userForm" class="user-info-container" style="display: none;">
+                    <h2 class="text-center mb-3">Detalles del Usuario</h2>
+                    <form id="updateUserForm">
+                        <input type="hidden" id="userId">
+                        
+                        <div class="form-group">
+                            <label for="role">Rol</label>
+                            <select id="role" class="form-control">
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                                <option value="premium">Premium</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-primary" onclick="updateUser()">Actualizar Rol</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteUser()">Eliminar Usuario</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/users.js"></script>

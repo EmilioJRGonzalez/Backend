@@ -1,8 +1,11 @@
 import express from 'express'
 import authII from '../middleware/auth.js'
 import { authToken } from '../utils/utils.js'
+import UserManagerMongo from '../controllers/UserManagerMongo.js'
 
 const router = express.Router()
+
+const user = new UserManagerMongo()
 
 router.get('/login-view', (req, res) => {
     res.render('login')
@@ -40,8 +43,13 @@ router.get('/reset_password-view/:token', async (req, res) => {
                     <button onclick="window.location.href='/view/passrecovery-view'">Ir a recuperación de contraseña</button>
                 </body>
             </html>
-        `);
+        `)
     }
-});
+})
+
+router.get('/admin-users', authII, async (req, res) => {
+    let aux = await user.getUsers()
+    res.render('adminUsers', {users: aux})
+})
 
 export default router

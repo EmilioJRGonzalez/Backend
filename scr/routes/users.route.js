@@ -56,20 +56,13 @@ router.get('/github', passport.authenticate("github", {}),  async (req, res) => 
 
 router.get('/callbackGithub', passport.authenticate("github", {}),  async (req, res) => {
 
-    /* req.session.usuario = req.user
-    res.setHeader('Content-Type', 'application/json');
-    return res.status(200).json({payload:req.user}); */
-
     req.session.email = req.user.email
     req.logger.debug(req.user)
     req.session.rol = 'user'
+    req.session.cart = req.user.cart
 
     res.redirect('/products')
 })
-
-/* router.get('/user', (req, res) => {
-    res.send(users)
-}) */
 
 router.get('/perfil', authII, (req, res)=>{
 
@@ -255,6 +248,18 @@ router.delete('/', async (req, res)=>{
 
     return res.send({ data: aux})
 
+})
+
+router.delete('/:uid', async (req, res) => {
+    let uid = req.params.uid
+
+    let aux = await user.deleteUser(uid)
+            
+    if (!aux) {
+        return res.status(400).send({data: aux, message: 'Usuario no encontrado'})
+    }
+
+    return res.send({ data: aux, message: 'Usuario eliminado correctamente' })
 })
 
 export default router

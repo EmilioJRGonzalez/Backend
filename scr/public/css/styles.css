@@ -1,12 +1,25 @@
-.caja{
+.caja {
   height: 50vh;
   overflow-y: scroll;
 }
 
 .user-info-container {
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+}
+
+.user-info-container h2 {
+  margin-bottom: 20px; /* Ajusta el margen inferior del encabezado */
+}
+
+.user-info-container .form-group {
+  margin-bottom: 15px; /* Ajusta el margen inferior de los elementos del formulario */
+}
+
+.user-info-container .btn {
+  margin-top: 10px; /* Ajusta el margen superior de los botones */
 }

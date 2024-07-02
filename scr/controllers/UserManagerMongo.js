@@ -86,6 +86,16 @@ class UserManager {
         }
     }
 
+    async deleteUser(uid){
+        try{
+            let resp = await user.deleteUser(uid)
+            return resp;
+        }catch(err){
+            console.debug(err)
+            return err
+        }
+    }
+
 }
 
 export default UserManager

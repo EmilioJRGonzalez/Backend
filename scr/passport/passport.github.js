@@ -26,7 +26,7 @@ const initPassport=()=>{
                     usuario = await userModel.create(
                         {
                             first_name: login, 
-                            last_name: "", 
+                            last_name: "last_name", 
                             email, 
                             age: 0, 
                             password: createHash(""),

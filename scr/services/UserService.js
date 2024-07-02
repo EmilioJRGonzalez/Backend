@@ -69,7 +69,7 @@ export default class UserService {
 
     async findAllUsers(){
         try{
-            return await Users.find().select('first_name email role')
+            return await Users.find().select('first_name email role').lean()
         }catch(err){
             return err
         }
@@ -96,6 +96,14 @@ export default class UserService {
                 result,
                 usersDeleted: usersToDelete
             };
+        } catch (err) {
+            throw err
+        }
+    }
+
+    async deleteUser(uid){
+        try {
+            return await Users.findOneAndDelete({ _id: uid })
         } catch (err) {
             throw err
         }
