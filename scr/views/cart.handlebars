@@ -9,22 +9,29 @@
                 <th scope="col">Descripción</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Cantidad</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             {{#each products}}
                {{!-- {{log this}}  --}}<!-- Imprime cada elemento de products en la consola -->
                 <tr>
+                    <td style="display: none;">{{product._id}}</td> <!-- Columna oculta para el ID -->
                     <td>{{product.title}}</td>
                     <td>{{product.description}}</td>
                     <td>$ {{product.price}}</td>
                     <td>{{quantity}}</td>
+                    <td>
+                        <button onclick="deleteProduct('{{../cartID}}','{{product._id}}')" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
                 </tr>
             {{/each}}
         </tbody>
     </table>
-    <!-- Botón "Comprar" -->
-    <div class="d-flex justify-content-end mt-3">
+    <div class="d-flex justify-content-between mt-3">
+        <button onclick="window.history.back()" class="btn btn-secondary">Volver</button>
         <button onclick="purchase('{{cartID}}')" class="btn btn-primary">Comprar</button>
     </div>
 </div>
