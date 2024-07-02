@@ -13,7 +13,7 @@ const initPassport=()=>{
         {
             clientID:"Iv1.92464d2b60fc2196",
             clientSecret:"b0605d48a1262f69db180c43ecc72d56e2bc0da2",
-            callbackURL:`${CONFIG.PROTOCOL}://${CONFIG.HOST}:${PORT}/api/users/callbackGithub`
+            callbackURL:`${CONFIG.PROTOCOL}://${CONFIG.HOST}/api/users/callbackGithub`
         },
         async(accessToken, refreshToken, profile, done) => {
             try{
