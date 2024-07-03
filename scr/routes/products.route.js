@@ -1,6 +1,9 @@
 import express from 'express'
 import ProductManagerMongo from '../controllers/ProductManagerMongo.js'
 import errorHandler from '../middleware/errHandler.js'
+import CONFIG from '../config/config.js'
+import transporter from '../utils/mail.js'
+import html from '../utils/plantillaMailEliminar.js'
 
 const router = express.Router()
 
@@ -51,11 +54,36 @@ router.delete('/:id', async (req, res) => {
     let id = req.params.id
     let user = req.body.user
     let s = 200
+    let owner = ''
 
+    let p = await prod.getProductById(id)
+    if (p && p.owner !== 'admin') {
+        owner = p.owner.toString()
+    }
+    
     let aux = await prod.deleteProduct(id, user)
-    console.log(aux)
     if (aux.toUpperCase().includes('ERROR')){
         s = 400
+    }
+
+    if (owner != ''){
+        let correoHTML = html
+                .replace("{{product_id}}", p._id)
+                .replace("{{product_title}}", p.title)
+                .replace("{{product_price}}", p.price.toFixed(2))
+                .replace("{{product_code}}", p.code);
+        console.log("DEST:", owner)
+
+        let mensaje = await transporter.sendMail({
+            from: `Ecommerce test ${CONFIG.MAIL_USER}`,
+            to: owner,
+            subject:'ECOMMERCE CODERHOUSE: Producto Eliminado',
+            text:'Producto Eliminado!',
+            html: correoHTML
+        })
+        if(!!mensaje.messageId){
+            console.log('email enviado', mensaje.messageId)
+        }
     }
 
     res.status(s).send({data:[], message: aux})

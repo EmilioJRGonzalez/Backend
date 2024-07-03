@@ -20,12 +20,12 @@ async function findUser(userId) {
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error('Error al buscar los datos del usuario');
+            throw new Error('Error al buscar los datos del usuario.');
         }
         return data.data;
     } catch (error) {
         console.error(error);
-        alert('Hubo un error al intentar realizar la compra.');
+        alert('Hubo un error al buscar los datos del usuario.');
     }
 }
 
